@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '13.0'
 
 target 'Bijarim' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -7,13 +7,12 @@ target 'Bijarim' do
 
   # Pods for Bijarim
   pod 'Firebase/Analytics'
-
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
+	
   target 'BijarimTests' do
     inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'BijarimUITests' do
     # Pods for testing
   end
 

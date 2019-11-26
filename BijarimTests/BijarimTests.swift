@@ -21,11 +21,11 @@ class BijarimTests: XCTestCase {
 
     func testGuaranteeSequenceOfSerialQueue() {
 		
-		let	r1	=	Request.request { (req) in
+		let	r1	=	Request.request { (req, _) in
 			print("R1")
 			req.finish()
 		}
-		let r2	=	Request.request { (req) in
+		let r2	=	Request.request { (req, _) in
 			print("R2")
 			req.finish()
 		}

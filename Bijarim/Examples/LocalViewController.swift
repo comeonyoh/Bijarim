@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  LocalViewController.swift
 //  Bijarim
 //
-//  Created by Clayton Kim on 2019/11/26.
+//  Created by JungSu Kim on 2019/11/26.
 //  Copyright © 2019 ODOV. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class LocalViewController: UIViewController {
 	
 	var data: [String]?
 	
@@ -18,7 +18,7 @@ class ViewController: UIViewController {
 		
 		super.viewDidLoad()
 		
-		let	request1	=	Request.request { (req) in
+		let	request1	=	Request.request { (req, _) in
 
 			self.data	=	[String]()
 			
@@ -34,7 +34,8 @@ class ViewController: UIViewController {
 			
 			req.finish()
 		}
-		let	request2	=	Request.request { (req) in
+		
+		let	request2	=	Request.request { (req, _) in
 
 			DispatchQueue.main.async {
 				self.tableView.reloadData()
@@ -48,7 +49,7 @@ class ViewController: UIViewController {
 	}
 }
 
-extension	ViewController:	UITableViewDataSource	{
+extension	LocalViewController:	UITableViewDataSource	{
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
@@ -65,13 +66,12 @@ extension	ViewController:	UITableViewDataSource	{
 	}
 }
 
-extension	ViewController:	UITableViewDelegate		{
+extension	LocalViewController:	UITableViewDelegate		{
 	
 }
 
-extension	ViewController:	RequestQueueStream		{
+extension	LocalViewController:	RequestQueueStream		{
 	
 	func operationCountDidChanged(_ spare: [Operation]?, by queue: OperationQueue) {
-		
 	}
 }

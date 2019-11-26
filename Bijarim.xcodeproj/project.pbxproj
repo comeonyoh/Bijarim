@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		014DEC3F238CA3DB00B99881 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DEC3E238CA3DB00B99881 /* AppDelegate.swift */; };
 		014DEC41238CA3DB00B99881 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DEC40238CA3DB00B99881 /* SceneDelegate.swift */; };
-		014DEC43238CA3DB00B99881 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DEC42238CA3DB00B99881 /* ViewController.swift */; };
 		014DEC46238CA3DB00B99881 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 014DEC44238CA3DB00B99881 /* Main.storyboard */; };
 		014DEC48238CA3E000B99881 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 014DEC47238CA3E000B99881 /* Assets.xcassets */; };
 		014DEC4B238CA3E000B99881 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 014DEC49238CA3E000B99881 /* LaunchScreen.storyboard */; };
@@ -17,6 +16,9 @@
 		014DEC70238CA45600B99881 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DEC6F238CA45600B99881 /* Request.swift */; };
 		014DEC72238CA47800B99881 /* RequestQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DEC71238CA47800B99881 /* RequestQueue.swift */; };
 		014DEC74238CBF9100B99881 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 014DEC73238CBF9100B99881 /* GoogleService-Info.plist */; };
+		7B47F10F238D5279001500C0 /* FirebaseRequestQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47F10E238D5279001500C0 /* FirebaseRequestQueue.swift */; };
+		7B8FF8A3238D4B8200B16001 /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8FF8A2238D4B8200B16001 /* LocalViewController.swift */; };
+		7B8FF8A5238D4CE200B16001 /* FirebaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8FF8A4238D4CE200B16001 /* FirebaseViewController.swift */; };
 		895E496263901410CE17846C /* Pods_Bijarim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97132D5ACDBC64FBC26A7027 /* Pods_Bijarim.framework */; };
 		C773BEEDC5CFBCD579F324BD /* Pods_BijarimTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834C2D6C93257E14BA83A1BE /* Pods_BijarimTests.framework */; };
 /* End PBXBuildFile section */
@@ -35,7 +37,6 @@
 		014DEC3B238CA3DB00B99881 /* Bijarim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bijarim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		014DEC3E238CA3DB00B99881 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		014DEC40238CA3DB00B99881 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		014DEC42238CA3DB00B99881 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		014DEC45238CA3DB00B99881 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		014DEC47238CA3E000B99881 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		014DEC4A238CA3E000B99881 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,6 +51,9 @@
 		3A033AB0D03D6917AFA40FE5 /* Pods-BijarimTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BijarimTests.debug.xcconfig"; path = "Target Support Files/Pods-BijarimTests/Pods-BijarimTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6462ACDE1709A87505F7C5FA /* Pods-Bijarim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bijarim.debug.xcconfig"; path = "Target Support Files/Pods-Bijarim/Pods-Bijarim.debug.xcconfig"; sourceTree = "<group>"; };
 		702A6E98A10D52461B52DF32 /* Pods-Bijarim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bijarim.release.xcconfig"; path = "Target Support Files/Pods-Bijarim/Pods-Bijarim.release.xcconfig"; sourceTree = "<group>"; };
+		7B47F10E238D5279001500C0 /* FirebaseRequestQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRequestQueue.swift; sourceTree = "<group>"; };
+		7B8FF8A2238D4B8200B16001 /* LocalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalViewController.swift; sourceTree = "<group>"; };
+		7B8FF8A4238D4CE200B16001 /* FirebaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseViewController.swift; sourceTree = "<group>"; };
 		7F9208B66AC41F6ED62AE831 /* Pods-Bijarim-BijarimUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bijarim-BijarimUITests.release.xcconfig"; path = "Target Support Files/Pods-Bijarim-BijarimUITests/Pods-Bijarim-BijarimUITests.release.xcconfig"; sourceTree = "<group>"; };
 		834C2D6C93257E14BA83A1BE /* Pods_BijarimTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BijarimTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97132D5ACDBC64FBC26A7027 /* Pods_Bijarim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bijarim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,10 +104,10 @@
 		014DEC3D238CA3DB00B99881 /* Bijarim */ = {
 			isa = PBXGroup;
 			children = (
+				7B8FF8A1238D4B6F00B16001 /* Examples */,
 				014DEC6E238CA44600B99881 /* Requests */,
 				014DEC3E238CA3DB00B99881 /* AppDelegate.swift */,
 				014DEC40238CA3DB00B99881 /* SceneDelegate.swift */,
-				014DEC42238CA3DB00B99881 /* ViewController.swift */,
 				014DEC44238CA3DB00B99881 /* Main.storyboard */,
 				014DEC47238CA3E000B99881 /* Assets.xcassets */,
 				014DEC49238CA3E000B99881 /* LaunchScreen.storyboard */,
@@ -127,6 +131,7 @@
 			children = (
 				014DEC6F238CA45600B99881 /* Request.swift */,
 				014DEC71238CA47800B99881 /* RequestQueue.swift */,
+				7B47F10E238D5279001500C0 /* FirebaseRequestQueue.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -152,6 +157,15 @@
 				834C2D6C93257E14BA83A1BE /* Pods_BijarimTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7B8FF8A1238D4B6F00B16001 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				7B8FF8A2238D4B8200B16001 /* LocalViewController.swift */,
+				7B8FF8A4238D4CE200B16001 /* FirebaseViewController.swift */,
+			);
+			path = Examples;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,9 +337,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014DEC43238CA3DB00B99881 /* ViewController.swift in Sources */,
+				7B8FF8A3238D4B8200B16001 /* LocalViewController.swift in Sources */,
 				014DEC70238CA45600B99881 /* Request.swift in Sources */,
 				014DEC72238CA47800B99881 /* RequestQueue.swift in Sources */,
+				7B8FF8A5238D4CE200B16001 /* FirebaseViewController.swift in Sources */,
+				7B47F10F238D5279001500C0 /* FirebaseRequestQueue.swift in Sources */,
 				014DEC3F238CA3DB00B99881 /* AppDelegate.swift in Sources */,
 				014DEC41238CA3DB00B99881 /* SceneDelegate.swift in Sources */,
 			);

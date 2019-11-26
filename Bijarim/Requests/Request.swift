@@ -17,9 +17,15 @@ protocol	RequestStream {
 	func requestDidFinished()
 }
 
-typealias RequestTask	=	(_ request: Request)	->	Void
+typealias RequestTask		=	(_ request: Request, _ object: AnyObject?)	->	Void
+typealias RequstCompletion	=	(_ data: Data?, _ error: Error?)			->	Void
 
-class	Request:	Operation	{
+protocol RequestComponent: NSObjectProtocol {
+	
+	var requestTaskObject:	AnyObject?	{	get	}
+}
+
+class	Request:	Operation,	RequestComponent	{
 	
 	enum State:	String {
 		case executing, finished, ready
@@ -29,7 +35,8 @@ class	Request:	Operation	{
 		}
 	}
 
-	var task:	RequestTask?
+	var task:		RequestTask?
+	var completion:	RequstCompletion?
 	
 	var state:	State	=	.ready	{
 		willSet	{
@@ -48,16 +55,18 @@ class	Request:	Operation	{
 		if requestWillBegin() {
 			main()
 			state	=	.executing
-			
-			if let	task	=	self.task	{
-				task(self)
-			}
+			task?(self, requestTaskObject)
 		}
 	}
 	
 	func finish() {
 		state	=	.finished
+		
 		requestDidFinished()
+	}
+	
+	func taskObject() -> AnyObject? {
+		return nil
 	}
 	
 	override var isReady: Bool	{
@@ -72,17 +81,28 @@ class	Request:	Operation	{
 		return state	==	.finished
 	}
 	
+	var requestTaskObject: AnyObject?	{
+		return nil
+	}
+
 	//	Creat request API family.
 	static	func request(_ task: @escaping RequestTask) -> Request {
 		
-		let request = Request()
+		let request		=	Request()
 		request.task	=	task
 		
 		return request
 	}
 
+	static	func request(_ task: @escaping RequestTask, with completion: @escaping RequstCompletion) -> Request {
+		
+		let request			=	Request()
+		request.task		=	task
+		request.completion	=	completion
+		
+		return request
+	}
 }
-
 
 extension	Request:	RequestStream	{
 	
