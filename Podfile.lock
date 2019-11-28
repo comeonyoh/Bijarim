@@ -276,7 +276,6 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - abseil
     - BoringSSL-GRPC
-    - Firebase
     - FirebaseAnalytics
     - FirebaseAuthInterop
     - FirebaseCoreDiagnostics
@@ -286,11 +285,9 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
-    - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
     - leveldb-library
-    - nanopb
   trunk:
     - Firebase
     - FirebaseCore
@@ -321,4 +318,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 95b81e92347d19058fb665c390f7ed9957d3af9f
 
-COCOAPODS: 1.8.0.beta.1
+COCOAPODS: 1.8.3

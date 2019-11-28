@@ -18,7 +18,7 @@ protocol	RequestStream {
 }
 
 typealias RequestTask		=	(_ request: Request, _ object: AnyObject?)	->	Void
-typealias RequstCompletion	=	(_ data: AnyObject?, _ error: Error?)		->	Void
+typealias RequstCompletion	=	(_ response: Response)						->	Void
 
 protocol RequestComponent: NSObjectProtocol {
 	

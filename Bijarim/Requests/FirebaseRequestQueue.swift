@@ -58,16 +58,24 @@ class FirebaseRequest: Request	{
 						for document in snapshot.documents	{
 							list.append(document.documentID)
 						}
-
+						
 						request.finish()
-						completion(list as AnyObject, nil)
+						
+						completion(FirebaseResponse(.success, list))
 					}
-					else {
-						completion(nil, error)
+					
+					else if let	error	=	error{
+						completion(Response(error))
 					}
 				}
 			}
 		}
 	}
+}
 
+class FirebaseResponse: Response {
+	
+	init (_ code: ResponseCode, _ list: [Any]) {
+		super.init(code, list)
+	}
 }

@@ -24,18 +24,12 @@ class FirebaseViewController: UIViewController, RequestQueueStream {
         super.viewDidLoad()
 
         let	queue		=	FirebaseRequestQueue(self)
-		let	request1	=	FirebaseRequest.request("example_accounts") { (data, error) in
-			
-			if let list	=	data	as? [String]	{
-				self.documentIdentifiers	=	list
-			}
+		let	request1	=	FirebaseRequest.request("example_accounts") { (response) in
+			self.documentIdentifiers	=	response.result?.list as? [String]
 		}
 		
-		let	request2	=	FirebaseRequest.request("address_samples") { (data, error) in
-
-			if let list	=	data	as? [String]	{
-				self.addressSamples	=	list
-			}
+		let	request2	=	FirebaseRequest.request("address_samples") { (response) in
+			self.addressSamples	=	response.result?.list as? [String]
 		}
 		
 		queue.addOperation(request1)
