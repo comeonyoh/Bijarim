@@ -35,7 +35,7 @@ public	class RequestQueue: OperationQueue {
 		}
 	}
 	
-	func prepareInitialize(_ stream: RequestQueueStream?) {
+	fileprivate	func prepareInitialize(_ stream: RequestQueueStream?) {
 		
 		delegate	=	stream
 		
@@ -52,15 +52,10 @@ extension	RequestQueue:	RequestQueueStream	{
 	}
 }
 
-class SerializeQueue: RequestQueue {
-	
-	override init() {
-		super.init()
-		self.maxConcurrentOperationCount	=	1
-	}
+public	class SerializeQueue: RequestQueue {
 
-	override init(_ stream: RequestQueueStream?) {
-		super.init(stream)
+	override func prepareInitialize(_ stream: RequestQueueStream?) {
+		super.prepareInitialize(stream)
 		self.maxConcurrentOperationCount	=	1
 	}
 }

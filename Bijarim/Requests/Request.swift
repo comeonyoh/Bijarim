@@ -18,7 +18,7 @@ protocol	RequestStream {
 }
 
 typealias RequestTask		=	(_ request: Request, _ object: AnyObject?)	->	Void
-typealias RequstCompletion	=	(_ data: Data?, _ error: Error?)			->	Void
+typealias RequstCompletion	=	(_ data: AnyObject?, _ error: Error?)		->	Void
 
 protocol RequestComponent: NSObjectProtocol {
 	
@@ -61,7 +61,6 @@ class	Request:	Operation,	RequestComponent	{
 	
 	func finish() {
 		state	=	.finished
-		
 		requestDidFinished()
 	}
 	
@@ -86,21 +85,20 @@ class	Request:	Operation,	RequestComponent	{
 	}
 
 	//	Creat request API family.
-	static	func request(_ task: @escaping RequestTask) -> Request {
+	required	init(_ task: @escaping RequestTask, with completion: RequstCompletion?) {
 		
-		let request		=	Request()
-		request.task	=	task
+		super.init()
 		
-		return request
+		self.task		=	task
+		self.completion	=	completion
+	}
+	
+	static	func request(_ task: @escaping RequestTask) -> Self {
+		return self.init(task, with: nil)
 	}
 
-	static	func request(_ task: @escaping RequestTask, with completion: @escaping RequstCompletion) -> Request {
-		
-		let request			=	Request()
-		request.task		=	task
-		request.completion	=	completion
-		
-		return request
+	static	func request(_ task: @escaping RequestTask, with completion: @escaping RequstCompletion) -> Self {
+		return self.init(task, with: completion)
 	}
 }
 

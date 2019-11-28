@@ -8,26 +8,104 @@
 
 import UIKit
 
-class FirebaseViewController: UIViewController {
+class FirebaseViewController: UIViewController, RequestQueueStream {
 
+	enum Section: Int {
+		case address
+		case document
+	}
+
+	var addressSamples:			[String]?
+	var documentIdentifiers:	[String]?
+
+	@IBOutlet weak var tableView: UITableView!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let	queue	=	FirebaseRequestQueue()
-		let	request	=	FirebaseRequest()
+        let	queue		=	FirebaseRequestQueue(self)
+		let	request1	=	FirebaseRequest.request("example_accounts") { (data, error) in
+			
+			if let list	=	data	as? [String]	{
+				self.documentIdentifiers	=	list
+			}
+		}
 		
-		queue.addOperation(request)
+		let	request2	=	FirebaseRequest.request("address_samples") { (data, error) in
+
+			if let list	=	data	as? [String]	{
+				self.addressSamples	=	list
+			}
+		}
+		
+		queue.addOperation(request1)
+		queue.addOperation(request2)
     }
-    
+	
+	func operationCountDidChanged(_ spare: [Operation]?, by queue: OperationQueue) {
 
-    /*
-    // MARK: - Navigation
+		if	spare?.count	==	0	{
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
+		}
+	}
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+extension	FirebaseViewController:	UITableViewDataSource	{
 
+	func numberOfSections(in tableView: UITableView) -> Int {
+		
+		var count	=	0
+		
+		if	let	address	=	addressSamples	{
+			count	=	count	+	address.count
+		}
+		
+		if	let	documents	=	documentIdentifiers	{
+			count	=	count	+	documents.count
+		}
+		
+		return count
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		
+		switch section {
+			
+		case Section.address.rawValue:
+			guard let addresses = addressSamples else { return 0 }
+			return addresses.count
+			
+		case Section.document.rawValue:
+			guard let identifers = documentIdentifiers else { return 0 }
+			return identifers.count
+			
+		default:
+			return 0
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		
+		let	cell	=	tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+		
+		switch indexPath.section {
+
+		case Section.address.rawValue:
+			cell.textLabel?.text	=	addressSamples?[indexPath.row]
+			
+		case Section.document.rawValue:
+			cell.textLabel?.text	=	documentIdentifiers?[indexPath.row]
+
+		default:
+			break
+		}
+		
+		return cell
+	}
+}
+
+extension	FirebaseViewController:	UITableViewDelegate		{
+	
 }
