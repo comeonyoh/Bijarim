@@ -36,11 +36,9 @@ class Response {
 	
 	init(_ error: Error) {
 		self.error	=	error
-		self.result	=	nil
 	}
 	
 	init(_ code: ResponseCode, _ data: Any) {
-		self.error	=	nil
 		self.result	=	ReponseResult(resultCode: code, data: data)
 	}
 }

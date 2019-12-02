@@ -85,6 +85,11 @@ class	Request:	Operation,	RequestComponent	{
 	}
 
 	//	Creat request API family.
+	
+	override init() {
+		super.init()
+	}
+	
 	required	init(_ task: @escaping RequestTask, with completion: RequstCompletion?) {
 		
 		super.init()

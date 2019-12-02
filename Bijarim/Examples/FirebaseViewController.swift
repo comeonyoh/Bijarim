@@ -21,14 +21,20 @@ class FirebaseViewController: UIViewController, RequestQueueStream {
 	@IBOutlet weak var tableView: UITableView!
 	
     override func viewDidLoad() {
+		
         super.viewDidLoad()
 
         let	queue		=	FirebaseRequestQueue(self)
-		let	request1	=	FirebaseRequest.request("example_accounts") { (response) in
+		
+		let	request1	=	FirebaseRequest.request({ (store) -> (Bool, [FirebasePathItem]) in
+			return (true, [FirebasePathItem(path: "example_accounts", pathType: .collection)])
+		}) { (response) in
 			self.documentIdentifiers	=	response.result?.list as? [String]
 		}
-		
-		let	request2	=	FirebaseRequest.request("address_samples") { (response) in
+
+		let	request2	=	FirebaseRequest.request({ (store) -> (Bool, [FirebasePathItem]) in
+			return (true, [FirebasePathItem(path: "address_samples", pathType: .collection)])
+		}) { (response) in
 			self.addressSamples	=	response.result?.list as? [String]
 		}
 		
