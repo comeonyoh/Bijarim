@@ -25,7 +25,7 @@ protocol RequestComponent: NSObjectProtocol {
 	var requestTaskObject:	AnyObject?	{	get	}
 }
 
-class	Request:	Operation,	RequestComponent	{
+public	class	Request:	Operation,	RequestComponent	{
 	
 	enum State:	String {
 		case executing, finished, ready
@@ -50,7 +50,7 @@ class	Request:	Operation,	RequestComponent	{
 		}
 	}
 	
-	override func start() {
+	public	override func start() {
 
 		if requestWillBegin() {
 			main()
@@ -68,15 +68,15 @@ class	Request:	Operation,	RequestComponent	{
 		return nil
 	}
 	
-	override var isReady: Bool	{
+	public	override var isReady: Bool	{
 		return super.isReady	&&	state	==	.ready
 	}
 	
-	override var isExecuting: Bool	{
+	public	override var isExecuting: Bool	{
 		return state	==	.executing
 	}
 	
-	override var isFinished: Bool	{
+	public	override var isFinished: Bool	{
 		return state	==	.finished
 	}
 	

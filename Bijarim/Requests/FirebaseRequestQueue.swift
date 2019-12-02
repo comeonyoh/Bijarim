@@ -14,17 +14,17 @@ enum FirebasePathType {
 	case collection
 }
 
-struct FirebasePathItem {
+public	struct FirebasePathItem {
 	
 	var path: String
 	var pathType: FirebasePathType
 }
 
-class FirebaseRequestQueue: SerializeQueue {
+public	class FirebaseRequestQueue: SerializeQueue {
 
 	let	store	=	Firestore.firestore()
 	
-	override func addOperation(_ op: Operation) {
+	public	override func addOperation(_ op: Operation) {
 
 		if let	request	=	op	as?	FirebaseRequest {
 			request.store	=	store
@@ -33,7 +33,7 @@ class FirebaseRequestQueue: SerializeQueue {
 		super.addOperation(op)
 	}
 	
-	override func addOperations(_ ops: [Operation], waitUntilFinished wait: Bool) {
+	public	override func addOperations(_ ops: [Operation], waitUntilFinished wait: Bool) {
 		
 		for op in ops {
 			
@@ -46,7 +46,7 @@ class FirebaseRequestQueue: SerializeQueue {
 	}
 }
 
-class FirebaseRequest: Request	{
+public	class FirebaseRequest: Request	{
 
 	typealias RequestCondition	=	(_ store: Firestore?)	->	(Bool,	[FirebasePathItem])
 	
@@ -97,7 +97,7 @@ class FirebaseRequest: Request	{
 
 extension	FirebaseRequest	{
 
-	static	func	convertFirebasePathItemToActiveDocumentReference (_ store: Firestore, path items: [FirebasePathItem]) -> DocumentReference? {
+	fileprivate	static	func	convertFirebasePathItemToActiveDocumentReference (_ store: Firestore, path items: [FirebasePathItem]) -> DocumentReference? {
 		
 		var document	:	DocumentReference?		=	nil
 		var collection	:	CollectionReference?	=	nil
@@ -106,7 +106,7 @@ extension	FirebaseRequest	{
 		return document
 	}
 	
-	static	func	convertFirebasePathItemToActiveCollectionReference (_ store: Firestore, path items: [FirebasePathItem]) -> CollectionReference? {
+	fileprivate	static	func	convertFirebasePathItemToActiveCollectionReference (_ store: Firestore, path items: [FirebasePathItem]) -> CollectionReference? {
 		
 		var document	:	DocumentReference?		=	nil
 		var collection	:	CollectionReference?	=	nil
@@ -116,7 +116,7 @@ extension	FirebaseRequest	{
 	}
 
 
-	static	func	matchDocumentAndCollection(_ document: inout DocumentReference?, collection: inout CollectionReference?, _ store: Firestore, path items: [FirebasePathItem])	{
+	private	static	func	matchDocumentAndCollection(_ document: inout DocumentReference?, collection: inout CollectionReference?, _ store: Firestore, path items: [FirebasePathItem])	{
 		
 		for item in items {
 			
