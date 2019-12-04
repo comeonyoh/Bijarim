@@ -13,25 +13,13 @@ enum ResponseCode: Int {
 }
 
 struct ReponseResult {
-	
-	var resultCode: ResponseCode
-	
-	var data: Any
-	
-	var list: [Any]?	{
-		
-		if let array	=	data	as?	[Any]	{
-			return array
-		}
-		
-		return nil
-	}
+	var code: ResponseCode
 }
 
 class Response {
 	
-	var error: Error?
-	
+	var data:	Meta?
+	var error:	Error?
 	var result: ReponseResult?
 	
 	init(_ error: Error) {
@@ -39,7 +27,7 @@ class Response {
 	}
 	
 	init(_ code: ResponseCode, _ data: Any) {
-		self.result	=	ReponseResult(resultCode: code, data: data)
+		self.result	=	ReponseResult(code: code)
 	}
 }
 

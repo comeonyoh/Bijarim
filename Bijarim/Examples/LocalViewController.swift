@@ -8,16 +8,16 @@
 
 import UIKit
 
-class LocalViewController: UIViewController {
+final	class LocalViewController: UIViewController {
 	
 	var data: [String]?
 	
 	@IBOutlet weak var tableView: UITableView!
 	
 	override func viewDidLoad() {
-		
+
 		super.viewDidLoad()
-		
+
 		let	request1	=	Request.request { (req, _) in
 
 			self.data	=	[String]()
@@ -34,7 +34,6 @@ class LocalViewController: UIViewController {
 			
 			req.finish()
 		}
-		
 		let	request2	=	Request.request { (req, _) in
 
 			DispatchQueue.main.async {
@@ -44,6 +43,7 @@ class LocalViewController: UIViewController {
 		}
 		
 		let	queue	=	SerializeQueue(self)
+
 		queue.addOperation(request1)
 		queue.addOperation(request2)
 	}

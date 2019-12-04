@@ -24,22 +24,22 @@ class FirebaseViewController: UIViewController, RequestQueueStream {
 		
         super.viewDidLoad()
 
-        let	queue		=	FirebaseRequestQueue(self)
-		
-		let	request1	=	FirebaseRequest.request({ (store) -> (Bool, [FirebasePathItem]) in
-			return (true, [FirebasePathItem(path: "example_accounts", pathType: .collection)])
-		}) { (response) in
-			self.documentIdentifiers	=	response.result?.list as? [String]
-		}
-
-		let	request2	=	FirebaseRequest.request({ (store) -> (Bool, [FirebasePathItem]) in
-			return (true, [FirebasePathItem(path: "address_samples", pathType: .collection)])
-		}) { (response) in
-			self.addressSamples	=	response.result?.list as? [String]
-		}
-		
-		queue.addOperation(request1)
-		queue.addOperation(request2)
+//        let	queue		=	FirebaseRequestQueue(self)
+//		
+//		let	request1	=	FirebaseRequest.request({ (store) -> (Bool, [FirebasePathItem]) in
+//			return (true, [FirebasePathItem(path: "example_accounts", pathType: .collection)])
+//		}) { (response) in
+//			self.documentIdentifiers	=	response.result?.list as? [String]
+//		}
+//
+//		let	request2	=	FirebaseRequest.request({ (store) -> (Bool, [FirebasePathItem]) in
+//			return (true, [FirebasePathItem(path: "address_samples", pathType: .collection)])
+//		}) { (response) in
+//			self.addressSamples	=	response.result?.list as? [String]
+//		}
+//		
+//		queue.addOperation(request1)
+//		queue.addOperation(request2)
     }
 	
 	func operationCountDidChanged(_ spare: [Operation]?, by queue: OperationQueue) {
