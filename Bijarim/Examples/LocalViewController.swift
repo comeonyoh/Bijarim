@@ -10,7 +10,7 @@ import UIKit
 
 final	class LocalViewController: UIViewController {
 	
-	var data: [String]?
+	var data:	MetaList<Meta>?
 	
 	@IBOutlet weak var tableView: UITableView!
 	
@@ -20,16 +20,8 @@ final	class LocalViewController: UIViewController {
 
 		let	request1	=	Request.request { (req, _) in
 
-			self.data	=	[String]()
-			
 			if	let path	=	Bundle.main.path(forResource: "Info", ofType: "plist"), let info	=	NSDictionary(contentsOfFile: path)	{
-				
-				for key in info.allKeys {
-					
-					if let	string	=	key as? String {
-						self.data?.append(string)
-					}
-				}
+				self.data	=	LocalListDescriptor().parseRawData(info.allKeys)
 			}
 			
 			req.finish()
@@ -60,7 +52,10 @@ extension	LocalViewController:	UITableViewDataSource	{
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-		cell.textLabel?.text	=	self.data?[indexPath.row]
+		
+		if	let	meta	=	self.data?[indexPath.row]	as?	LocalIdentifier	{
+			cell.textLabel?.text	=	meta.identifier
+		}
 		
 		return cell
 	}
@@ -73,5 +68,31 @@ extension	LocalViewController:	UITableViewDelegate		{
 extension	LocalViewController:	RequestQueueStream		{
 	
 	func operationCountDidChanged(_ spare: [Operation]?, by queue: OperationQueue) {
+	}
+}
+
+
+class LocalIdentifier: Meta {
+	@objc	dynamic	var	identifier:	String!
+}
+
+class LocalDescriptor: Descriptor {
+	
+	override public	class var descriptors: [DescriptorValue]?	{
+		return [
+			//	"" means the key value from remote is nil.
+			DescriptorValue(from: "", to: "identifier")
+		]
+	}
+}
+
+class LocalListDescriptor: MetaListDescriptor {
+	
+	override var classOfItemMeta: Meta.Type	{
+		return LocalIdentifier.self
+	}
+	
+	override class var descriptors: [DescriptorValue]?	{
+		return LocalDescriptor.descriptors
 	}
 }

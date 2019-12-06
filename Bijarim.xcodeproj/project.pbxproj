@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010EC2C3239A2979005FB9DE /* MetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EC2C2239A2979005FB9DE /* MetaTests.swift */; };
 		014B46C72395DD0400A17E44 /* MetaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014B46C62395DD0400A17E44 /* MetaObject.swift */; };
 		014DEC3F238CA3DB00B99881 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DEC3E238CA3DB00B99881 /* AppDelegate.swift */; };
 		014DEC41238CA3DB00B99881 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DEC40238CA3DB00B99881 /* SceneDelegate.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		010EC2C2239A2979005FB9DE /* MetaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaTests.swift; sourceTree = "<group>"; };
 		014B46C62395DD0400A17E44 /* MetaObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaObject.swift; sourceTree = "<group>"; };
 		014DEC3B238CA3DB00B99881 /* Bijarim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bijarim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		014DEC3E238CA3DB00B99881 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		014DEC54238CA3E000B99881 /* BijarimTests */ = {
 			isa = PBXGroup;
 			children = (
+				010EC2C2239A2979005FB9DE /* MetaTests.swift */,
 				01AD4003238F50150025B2C6 /* RequestTests.swift */,
 				014DEC57238CA3E000B99881 /* Info.plist */,
 			);
@@ -375,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				010EC2C3239A2979005FB9DE /* MetaTests.swift in Sources */,
 				01AD4004238F50150025B2C6 /* RequestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

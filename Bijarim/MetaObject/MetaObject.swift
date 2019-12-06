@@ -21,7 +21,7 @@ public	class	Descriptor {
 		return nil
 	}
 	
-	public	var descriptors:	[DescriptorValue]?	{
+	public	class	var	descriptors:	[DescriptorValue]?	{
 		return []
 	}
 	
@@ -30,18 +30,18 @@ public	class	Descriptor {
 	}
 
 	//	help parsing raw-data with descriptors and creating new one.
-	public	func parseRawData(_ dictionary: [String: Any])	->	Meta {
+	public	func parseRawData(_ rawData: [String: Any])	->	Meta {
 
 		let	meta	=	classOfMeta.init()
 		
-		guard let descriptors = descriptors else { return meta }
+		guard let descriptors = type(of: self).descriptors else { return meta }
 
 		for descriptor in descriptors	{
-			if	let	value	=	dictionary[descriptor.from]	{
+			if	let	value	=	rawData[descriptor.from]	{
 				meta.setValue(value, forKey: descriptor.to)
 			}
 		}
-		
+
 		return meta
 	}
 	
@@ -49,7 +49,7 @@ public	class	Descriptor {
 
 public	class	Meta:	NSObject	{
 
-	lazy	var	dictionary: [String: Any]	=	{
+	private	lazy	var	dictionary: [String: Any]	=	{
 		return	[String	:	Any]()
 	}()
 	
@@ -69,6 +69,42 @@ public	class	Meta:	NSObject	{
 
 public	class	MetaList<T:	Meta>:	Meta	{
 	
+	private	lazy	var list:	[T]?	=	{
+		
+		var	metaList	=	[T]()
+		return metaList
+	}()
+	
+	public	func appendItem(_ item: T) {
+		list?.append(item)
+	}
+}
+
+extension	MetaList:	Collection	{
+	
+	public typealias Index = Int
+	
+	public var startIndex: Int	{
+		guard let list = list else { return 0 }
+		return list.startIndex
+	}
+	
+	public var endIndex: Int	{
+		guard let list = list else { return 0 }
+		return	list.endIndex
+	}
+	
+	public subscript(position: Int) -> T? {
+
+		guard	let	list	=	list	else	{	return nil	}
+		return list[position]
+	}
+	
+	public func index(after i: Int) -> Int {
+
+		guard	let	list	=	list	else	{	return 0	}
+		return	list.index(after: i)
+	}
 }
 
 public	class	MetaListDescriptor:	Descriptor	{
@@ -80,30 +116,30 @@ public	class	MetaListDescriptor:	Descriptor	{
 	public override var classOfMeta: Meta.Type	{
 		return MetaList.self
 	}
-}
-
-
-
-/**
- *	Examples
- */
-public	class	TrackMeta:	Meta	{
 	
-	@objc	dynamic	var	title:	String!
+	public func parseRawData(_ rawData: [Any])	->	MetaList<Meta> {
+		
+		guard	let	list	=	classOfMeta.init()	as?	MetaList	<Meta>	else { return MetaList() }
+		
+		for	data	in	rawData	{
 
-}
+			let	meta	=	classOfItemMeta.init()
+			guard	let	descriptors	=	type(of: self).descriptors	else { return MetaList() }
 
-public	class	TrackDescriptor:	Descriptor	{
-	
-	override	public	var descriptors: [DescriptorValue]?	{
-		return [
-			DescriptorValue(from: "track_title", to: "title"),
-			DescriptorValue(from: "artist_title", to: "artist_title"),
-		]
+			for descriptor in descriptors	{
+
+				if	let	value	=	data	as? String	{
+					meta.setValue(value, forKey: descriptor.to)
+				}
+				else if	let	dict	=	data	as?	[String:	Any],	let	value	=	dict[descriptor.from]	as?	String	{
+					meta.setValue(value, forKey: descriptor.to)
+				}
+			}
+
+			list.appendItem(meta)
+		}
+		
+		return list
 	}
-	
-	override	public	var classOfMeta: Meta.Type	{
-		return TrackMeta.self
-	}
-	
 }
+
