@@ -56,7 +56,7 @@ public	class FirebaseRequest: Request	{
 		return store
 	}
 	
-	static	func request(_ condition: @escaping RequestCondition, with completion: @escaping RequstCompletion) -> Request {
+	static	func requestDocuments(_ condition: @escaping RequestCondition, with completion: @escaping RequstCompletion) -> Request {
 
 		return	FirebaseRequest.request { (request, object) in
 
@@ -76,9 +76,8 @@ public	class FirebaseRequest: Request	{
 							list.append(document.documentID)
 						}
 
+						completion(MetaResponse(.success, list, descriptor: DocumentListDescriptor()))
 						request.finish()
-
-						completion(FirebaseResponse(.success, list))
 					}
 
 					else if let	error	=	error	{
@@ -140,12 +139,5 @@ extension	FirebaseRequest	{
 				}
 			}
 		}
-	}
-}
-
-class FirebaseResponse: Response {
-	
-	init (_ code: ResponseCode, _ list: [Any]) {
-		super.init(code, list)
 	}
 }

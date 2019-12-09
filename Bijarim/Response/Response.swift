@@ -18,7 +18,6 @@ struct ReponseResult {
 
 class Response {
 	
-	var data:	Meta?
 	var error:	Error?
 	var result: ReponseResult?
 	
@@ -26,8 +25,23 @@ class Response {
 		self.error	=	error
 	}
 	
-	init(_ code: ResponseCode, _ data: Any) {
+	init(_ code: ResponseCode) {
 		self.result	=	ReponseResult(code: code)
 	}
+	
 }
 
+class MetaResponse	: Response {
+	
+	var data:	Meta?
+	var list:	MetaList<Meta>?
+	
+	required	init (_ code: ResponseCode, _ list: [Any]?, descriptor creator:	MetaListDescriptor) {
+
+		super.init(code)
+
+		if	let	list		=	list	{
+			self.list		=	creator.parseRawData(list)
+		}
+	}
+}

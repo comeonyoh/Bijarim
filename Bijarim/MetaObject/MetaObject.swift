@@ -49,6 +49,8 @@ public	class	Descriptor {
 
 public	class	Meta:	NSObject	{
 
+	@objc	dynamic	var	identifier:	String!
+
 	private	lazy	var	dictionary: [String: Any]	=	{
 		return	[String	:	Any]()
 	}()

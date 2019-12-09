@@ -15,8 +15,8 @@ class FirebaseViewController: UIViewController, RequestQueueStream {
 		case document
 	}
 
-	var addressSamples:			[String]?
-	var documentIdentifiers:	[String]?
+	var addressSamples:			MetaList<Meta>?
+	var documentIdentifiers:	MetaList<Meta>?
 
 	@IBOutlet weak var tableView: UITableView!
 	
@@ -24,22 +24,31 @@ class FirebaseViewController: UIViewController, RequestQueueStream {
 		
         super.viewDidLoad()
 
-//        let	queue		=	FirebaseRequestQueue(self)
-//		
-//		let	request1	=	FirebaseRequest.request({ (store) -> (Bool, [FirebasePathItem]) in
-//			return (true, [FirebasePathItem(path: "example_accounts", pathType: .collection)])
-//		}) { (response) in
-//			self.documentIdentifiers	=	response.result?.list as? [String]
-//		}
-//
-//		let	request2	=	FirebaseRequest.request({ (store) -> (Bool, [FirebasePathItem]) in
-//			return (true, [FirebasePathItem(path: "address_samples", pathType: .collection)])
-//		}) { (response) in
-//			self.addressSamples	=	response.result?.list as? [String]
-//		}
-//		
-//		queue.addOperation(request1)
-//		queue.addOperation(request2)
+        let	queue		=	FirebaseRequestQueue(self)
+		
+		let	request1	=	FirebaseRequest.requestDocuments({ (store) -> (Bool, [FirebasePathItem]) in
+
+			return (true, [FirebasePathItem(path: "address_samples", pathType: .collection)])
+
+		}) { (response) in
+
+			if let metaResponse	=	response	as?	MetaResponse	{
+				self.addressSamples	=	metaResponse.list
+			}
+		}
+		let	request2	=	FirebaseRequest.requestDocuments({ (store) -> (Bool, [FirebasePathItem]) in
+
+			return (true, [FirebasePathItem(path: "example_accounts", pathType: .collection)])
+
+		}) { (response) in
+
+			if let metaResponse	=	response	as?	MetaResponse	{
+				self.documentIdentifiers	=	metaResponse.list
+			}
+		}
+		
+		queue.addOperation(request1)
+		queue.addOperation(request2)
     }
 	
 	func operationCountDidChanged(_ spare: [Operation]?, by queue: OperationQueue) {
@@ -91,12 +100,12 @@ extension	FirebaseViewController:	UITableViewDataSource	{
 		let	cell	=	tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 		
 		switch indexPath.section {
-
+			
 		case Section.address.rawValue:
-			cell.textLabel?.text	=	addressSamples?[indexPath.row]
+			cell.textLabel?.text	=	addressSamples?[indexPath.row]?.identifier
 			
 		case Section.document.rawValue:
-			cell.textLabel?.text	=	documentIdentifiers?[indexPath.row]
+			cell.textLabel?.text	=	documentIdentifiers?[indexPath.row]?.identifier
 
 		default:
 			break
@@ -106,6 +115,5 @@ extension	FirebaseViewController:	UITableViewDataSource	{
 	}
 }
 
-extension	FirebaseViewController:	UITableViewDelegate		{
-	
-}
+extension	FirebaseViewController:	UITableViewDelegate		{	}
+

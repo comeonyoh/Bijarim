@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		010EC2C3239A2979005FB9DE /* MetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EC2C2239A2979005FB9DE /* MetaTests.swift */; };
+		01320E49239E57B700AB423D /* DocumentIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01320E48239E57B700AB423D /* DocumentIdentifier.swift */; };
 		014B46C72395DD0400A17E44 /* MetaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014B46C62395DD0400A17E44 /* MetaObject.swift */; };
 		014DEC3F238CA3DB00B99881 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DEC3E238CA3DB00B99881 /* AppDelegate.swift */; };
 		014DEC41238CA3DB00B99881 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DEC40238CA3DB00B99881 /* SceneDelegate.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		010EC2C2239A2979005FB9DE /* MetaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaTests.swift; sourceTree = "<group>"; };
+		01320E48239E57B700AB423D /* DocumentIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentIdentifier.swift; sourceTree = "<group>"; };
 		014B46C62395DD0400A17E44 /* MetaObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaObject.swift; sourceTree = "<group>"; };
 		014DEC3B238CA3DB00B99881 /* Bijarim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bijarim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		014DEC3E238CA3DB00B99881 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				014B46C62395DD0400A17E44 /* MetaObject.swift */,
+				01320E48239E57B700AB423D /* DocumentIdentifier.swift */,
 			);
 			path = MetaObject;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				7B9D19DC239004F20021D0A0 /* Response.swift in Sources */,
 				7B8FF8A3238D4B8200B16001 /* LocalViewController.swift in Sources */,
 				014B46C72395DD0400A17E44 /* MetaObject.swift in Sources */,
+				01320E49239E57B700AB423D /* DocumentIdentifier.swift in Sources */,
 				014DEC70238CA45600B99881 /* Request.swift in Sources */,
 				014DEC72238CA47800B99881 /* RequestQueue.swift in Sources */,
 				7B8FF8A5238D4CE200B16001 /* FirebaseViewController.swift in Sources */,

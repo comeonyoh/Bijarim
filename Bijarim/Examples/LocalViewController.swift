@@ -61,19 +61,15 @@ extension	LocalViewController:	UITableViewDataSource	{
 	}
 }
 
-extension	LocalViewController:	UITableViewDelegate		{
-	
-}
+extension	LocalViewController:	UITableViewDelegate		{	}
 
 extension	LocalViewController:	RequestQueueStream		{
 	
-	func operationCountDidChanged(_ spare: [Operation]?, by queue: OperationQueue) {
-	}
+	func operationCountDidChanged(_ spare: [Operation]?, by queue: OperationQueue) {}
 }
 
 
 class LocalIdentifier: Meta {
-	@objc	dynamic	var	identifier:	String!
 }
 
 class LocalDescriptor: Descriptor {
