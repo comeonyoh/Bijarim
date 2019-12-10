@@ -51,7 +51,7 @@ public	class FirebaseRequest: Request	{
 	typealias RequestCondition	=	(_ store: Firestore?)	->	(Bool,	[FirebasePathItem])
 	
 	weak	var	store:	Firestore?
-	
+		
 	override	var	requestTaskObject: AnyObject?	{
 		return store
 	}
@@ -71,7 +71,7 @@ public	class FirebaseRequest: Request	{
 					if let snapshot	=	snapshot, error	==	nil	{
 
 						var list	=	[String]()
-
+						
 						for document in snapshot.documents	{
 							list.append(document.documentID)
 						}
@@ -82,6 +82,7 @@ public	class FirebaseRequest: Request	{
 
 					else if let	error	=	error	{
 						completion(Response(error))
+						request.finish()
 					}
 				})
 			}
@@ -96,7 +97,7 @@ public	class FirebaseRequest: Request	{
 
 extension	FirebaseRequest	{
 
-	fileprivate	static	func	convertFirebasePathItemToActiveDocumentReference (_ store: Firestore, path items: [FirebasePathItem]) -> DocumentReference? {
+	public	static	func	convertFirebasePathItemToActiveDocumentReference (_ store: Firestore, path items: [FirebasePathItem]) -> DocumentReference? {
 		
 		var document	:	DocumentReference?		=	nil
 		var collection	:	CollectionReference?	=	nil
@@ -105,7 +106,7 @@ extension	FirebaseRequest	{
 		return document
 	}
 	
-	fileprivate	static	func	convertFirebasePathItemToActiveCollectionReference (_ store: Firestore, path items: [FirebasePathItem]) -> CollectionReference? {
+	public	static	func	convertFirebasePathItemToActiveCollectionReference (_ store: Firestore, path items: [FirebasePathItem]) -> CollectionReference? {
 		
 		var document	:	DocumentReference?		=	nil
 		var collection	:	CollectionReference?	=	nil

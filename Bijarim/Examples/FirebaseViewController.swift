@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FirebaseViewController: UIViewController, RequestQueueStream {
 
@@ -36,12 +37,37 @@ class FirebaseViewController: UIViewController, RequestQueueStream {
 				self.addressSamples	=	metaResponse.list
 			}
 		}
-		let	request2	=	FirebaseRequest.requestDocuments({ (store) -> (Bool, [FirebasePathItem]) in
+		
+		let	request2		=	FirebaseRequest()
 
-			return (true, [FirebasePathItem(path: "example_accounts", pathType: .collection)])
+		request2.task		=	{	(request, object) in
+			
+			if	let	firebase	=	request	as?	FirebaseRequest,	let	store	=	firebase.store	{
+				
+				let	path		=	[FirebasePathItem(path: "example_accounts", pathType: .collection)]
+				
+				FirebaseRequest.convertFirebasePathItemToActiveCollectionReference(store, path: path)?.getDocuments(completion: { (snapshot, error) in
+			
+					if let snapshot	=	snapshot, error	==	nil	{
 
-		}) { (response) in
-
+						var list	=	[String]()
+						
+						for document in snapshot.documents	{
+							list.append(document.documentID)
+						}
+						
+						request.completion?(MetaResponse(.success, list, descriptor: DocumentListDescriptor()))
+						request.finish()
+					}
+					
+					else {
+						request.finish()
+					}
+				})
+			}
+		}
+		request2.completion	=	{	response in
+			
 			if let metaResponse	=	response	as?	MetaResponse	{
 				self.documentIdentifiers	=	metaResponse.list
 			}

@@ -79,10 +79,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <sections>
-                            <tableViewSection id="xat-oM-c4n">
+                            <tableViewSection headerTitle="Examples" id="xat-oM-c4n">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Bfh-cf-8To" style="IBUITableViewCellStyleDefault" id="fEh-Pe-wJT">
-                                        <rect key="frame" x="0.0" y="18" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fEh-Pe-wJT" id="Oe3-EF-q1m">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -102,7 +102,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="bj2-Mn-hVz" style="IBUITableViewCellStyleDefault" id="lQ2-kt-WNM">
-                                        <rect key="frame" x="0.0" y="61.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="99" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lQ2-kt-WNM" id="Aj5-j7-9Kl">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -121,6 +121,26 @@
                                             <segue destination="qH2-EZ-Ldf" kind="show" id="PBC-r9-f0c"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="dHp-nu-Dzu" style="IBUITableViewCellStyleDefault" id="EvL-lJ-dbD">
+                                        <rect key="frame" x="0.0" y="142.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EvL-lJ-dbD" id="oU7-CA-KzW">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Multiple Sections Example" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dHp-nu-Dzu">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Ocg-m7-hQC" kind="show" id="Q88-CI-55G"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -134,6 +154,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQK-kV-4nW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="999" y="139"/>
+        </scene>
+        <!--Multiple Sections-->
+        <scene sceneID="LTe-zz-WUg">
+            <objects>
+                <viewController id="Ocg-m7-hQC" customClass="MultipleSectionViewController" customModule="Bijarim" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="96R-rW-lCM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Biw-mJ-oyc">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ocg-m7-hQC" id="dfl-9n-OfI"/>
+                                    <outlet property="delegate" destination="Ocg-m7-hQC" id="tln-yi-CcW"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Biw-mJ-oyc" firstAttribute="leading" secondItem="jyN-WI-bTZ" secondAttribute="leading" id="77b-BF-lZ2"/>
+                            <constraint firstItem="jyN-WI-bTZ" firstAttribute="trailing" secondItem="Biw-mJ-oyc" secondAttribute="trailing" id="IOY-WB-UKe"/>
+                            <constraint firstItem="Biw-mJ-oyc" firstAttribute="top" secondItem="96R-rW-lCM" secondAttribute="top" id="LBB-NZ-IJi"/>
+                            <constraint firstAttribute="bottom" secondItem="Biw-mJ-oyc" secondAttribute="bottom" id="Vz8-0F-qdm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jyN-WI-bTZ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Multiple Sections" id="DWL-oF-DzA"/>
+                    <connections>
+                        <outlet property="dataLoader" destination="RAh-ka-Qa9" id="chZ-z8-Wj3"/>
+                        <outlet property="tableView" destination="Biw-mJ-oyc" id="3xq-eJ-dOi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F7G-tJ-PIj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="RAh-ka-Qa9" customClass="TableViewRequestLoader" customModule="Bijarim" customModuleProvider="target">
+                    <connections>
+                        <outletCollection property="sections" destination="TIR-pr-3C6" collectionClass="NSMutableArray" id="Yep-q2-MY7"/>
+                        <outletCollection property="sections" destination="How-8e-E1f" collectionClass="NSMutableArray" id="qsk-tu-DBY"/>
+                    </connections>
+                </customObject>
+                <customObject id="TIR-pr-3C6" customClass="FirebaseSection1" customModule="Bijarim" customModuleProvider="target"/>
+                <customObject id="How-8e-E1f" customClass="FirebaseSection2" customModule="Bijarim" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="999" y="938"/>
         </scene>
         <!--Firebase-->
         <scene sceneID="HUr-be-NJk">
@@ -178,7 +242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7iD-Zd-mIb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1818.840579710145" y="816.96428571428567"/>
+            <point key="canvasLocation" x="1819" y="938"/>
         </scene>
     </scenes>
 </document>
