@@ -8,28 +8,39 @@
 
 import Foundation
 
+class Team: Meta {
+	@objc	dynamic	var name: String!
+	@objc	dynamic	var country: String!
+}
+
 class SoccerPlayer: Meta {
+	
 	dynamic	var rank: Int!
 	@objc	dynamic	var name: String!
 	@objc	dynamic	var imagePath: String?
+	@objc	dynamic	var	team:	Team!
+	
+	override var description: String	{
+		return "Name: \(String(describing: name)), Rank: \(String(describing: rank)), path: \(String(describing: imagePath))"
+	}
 }
 
 class SoccerPlayerDescriptor: Descriptor {
 	
 	override public	class var descriptors: [DescriptorValue]?	{
 		return [
-			//	"" means the key value from remote is nil.
 			DescriptorValue(from: "id", to: "identifier"),
 			DescriptorValue(from: "name", to: "name"),
 			DescriptorValue(from: "rank", to: "rank"),
-			DescriptorValue(from: "imagePath", to: "imagePath")
+			DescriptorValue(from: "imagePath", to: "imagePath"),
+			DescriptorValue(from: "team_info", to: "team")
 		]
 	}
 }
 
 class SoccerPlayerListDescriptor: MetaListDescriptor {
-	
-	override class var classOfMeta: Meta.Type	{
+
+	override class var classOfItemMeta: Meta.Type	{
 		return SoccerPlayer.self
 	}
 	
@@ -37,3 +48,4 @@ class SoccerPlayerListDescriptor: MetaListDescriptor {
 		return SoccerPlayerDescriptor.descriptors
 	}
 }
+

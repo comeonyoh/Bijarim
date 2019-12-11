@@ -66,6 +66,7 @@ public	class	Meta:	NSObject	{
 	public override func value(forUndefinedKey key: String) -> Any? {
 		return	dictionary[key]
 	}
+	
 }
 
 
@@ -133,8 +134,8 @@ public	class	MetaListDescriptor:	Descriptor	{
 				if	let	value	=	data	as? String	{
 					meta.setValue(value, forKey: descriptor.to)
 				}
-				else if	let	dict	=	data	as?	[String:	Any],	let	value	=	dict[descriptor.from]	as?	String	{
-					meta.setValue(value, forKey: descriptor.to)
+				else if	let	dict	=	data	as?	[String:	Any]	{
+					meta.setValue(dict[descriptor.from], forKey: descriptor.to)
 				}
 			}
 

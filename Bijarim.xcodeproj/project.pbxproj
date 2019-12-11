@@ -23,6 +23,8 @@
 		0150EA05239F1D2C00D3394A /* MultipleSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0150EA04239F1D2C00D3394A /* MultipleSectionViewController.swift */; };
 		0150EA07239F2B6300D3394A /* TableViewRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0150EA06239F2B6300D3394A /* TableViewRequestLoader.swift */; };
 		01784B0923A0D36400EE2AF1 /* SoccerPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01784B0823A0D36400EE2AF1 /* SoccerPlayer.swift */; };
+		01784B0B23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01784B0A23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift */; };
+		01784B0D23A0E12700EE2AF1 /* ComplexMetaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01784B0C23A0E12700EE2AF1 /* ComplexMetaViewController.swift */; };
 		01AD4004238F50150025B2C6 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AD4003238F50150025B2C6 /* RequestTests.swift */; };
 		7B47F10F238D5279001500C0 /* FirebaseRequestQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47F10E238D5279001500C0 /* FirebaseRequestQueue.swift */; };
 		7B8FF8A3238D4B8200B16001 /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8FF8A2238D4B8200B16001 /* LocalViewController.swift */; };
@@ -63,6 +65,8 @@
 		0150EA04239F1D2C00D3394A /* MultipleSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSectionViewController.swift; sourceTree = "<group>"; };
 		0150EA06239F2B6300D3394A /* TableViewRequestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewRequestLoader.swift; sourceTree = "<group>"; };
 		01784B0823A0D36400EE2AF1 /* SoccerPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoccerPlayer.swift; sourceTree = "<group>"; };
+		01784B0A23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewRequestLoader.swift; sourceTree = "<group>"; };
+		01784B0C23A0E12700EE2AF1 /* ComplexMetaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexMetaViewController.swift; sourceTree = "<group>"; };
 		01AD4003238F50150025B2C6 /* RequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; };
 		12367762BD9678F3EB1D1CC0 /* Pods-Bijarim-BijarimUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bijarim-BijarimUITests.debug.xcconfig"; path = "Target Support Files/Pods-Bijarim-BijarimUITests/Pods-Bijarim-BijarimUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3A033AB0D03D6917AFA40FE5 /* Pods-BijarimTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BijarimTests.debug.xcconfig"; path = "Target Support Files/Pods-BijarimTests/Pods-BijarimTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 				0150E9FF239F16F200D3394A /* RequestLoader.swift */,
 				0150EA01239F181800D3394A /* RequestSection.swift */,
 				0150EA06239F2B6300D3394A /* TableViewRequestLoader.swift */,
+				01784B0A23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				7B8FF8A2238D4B8200B16001 /* LocalViewController.swift */,
 				7B8FF8A4238D4CE200B16001 /* FirebaseViewController.swift */,
 				0150EA04239F1D2C00D3394A /* MultipleSectionViewController.swift */,
+				01784B0C23A0E12700EE2AF1 /* ComplexMetaViewController.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -389,11 +395,13 @@
 				014DEC70238CA45600B99881 /* Request.swift in Sources */,
 				014DEC72238CA47800B99881 /* RequestQueue.swift in Sources */,
 				01784B0923A0D36400EE2AF1 /* SoccerPlayer.swift in Sources */,
+				01784B0B23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift in Sources */,
 				7B8FF8A5238D4CE200B16001 /* FirebaseViewController.swift in Sources */,
 				7B47F10F238D5279001500C0 /* FirebaseRequestQueue.swift in Sources */,
 				014DEC3F238CA3DB00B99881 /* AppDelegate.swift in Sources */,
 				0150EA02239F181800D3394A /* RequestSection.swift in Sources */,
 				0150EA00239F16F200D3394A /* RequestLoader.swift in Sources */,
+				01784B0D23A0E12700EE2AF1 /* ComplexMetaViewController.swift in Sources */,
 				014DEC41238CA3DB00B99881 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

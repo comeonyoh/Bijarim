@@ -75,10 +75,16 @@ public	class FirebaseRequest: Request	{
 			FirebaseRequest.convertFirebasePathItemToActiveCollectionReference(store, path: path)?.getDocuments(completion: { (snapshot, error) in
 				
 				if	let	snapshot	=	snapshot,	error	==	nil	{
-					var list		=	[String]()
+					var list		=	[Any]()
 					
 					for document in snapshot.documents	{
-						list.append(document.documentID)
+
+						if document.data().count	==	0	{
+							list.append(document.documentID)
+						}
+						else {
+							list.append(document.data())
+						}
 					}
 					
 					request.finish(MetaResponse(.success, list, descriptor: type(of: self).descriptor as! MetaListDescriptor))
