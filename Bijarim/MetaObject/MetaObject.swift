@@ -25,14 +25,14 @@ public	class	Descriptor {
 		return []
 	}
 	
-	public	var classOfMeta:	Meta.Type	{
+	public	class	var classOfMeta:	Meta.Type	{
 		return Meta.self
 	}
 
 	//	help parsing raw-data with descriptors and creating new one.
 	public	func parseRawData(_ rawData: [String: Any])	->	Meta {
 
-		let	meta	=	classOfMeta.init()
+		let	meta	=	type(of: self).classOfMeta.init()
 		
 		guard let descriptors = type(of: self).descriptors else { return meta }
 
@@ -111,21 +111,21 @@ extension	MetaList:	Collection	{
 
 public	class	MetaListDescriptor:	Descriptor	{
 	
-	public	var classOfItemMeta:	Meta.Type	{
+	public	class	var classOfItemMeta:	Meta.Type	{
 		return Meta.self
 	}
 	
-	public override var classOfMeta: Meta.Type	{
+	public override class var classOfMeta: Meta.Type	{
 		return MetaList.self
 	}
 	
 	public func parseRawData(_ rawData: [Any])	->	MetaList<Meta> {
 		
-		guard	let	list	=	classOfMeta.init()	as?	MetaList	<Meta>	else { return MetaList() }
+		guard	let	list	=	type(of: self).classOfMeta.init()	as?	MetaList	<Meta>	else { return MetaList() }
 		
 		for	data	in	rawData	{
 
-			let	meta	=	classOfItemMeta.init()
+			let	meta	=	type(of: self).classOfItemMeta.init()
 			guard	let	descriptors	=	type(of: self).descriptors	else { return MetaList() }
 
 			for descriptor in descriptors	{

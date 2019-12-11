@@ -10,7 +10,8 @@ target 'Bijarim' do
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
-	
+	pod 'Firebase/Storage'
+
   target 'BijarimTests' do
     inherit! :search_paths
     # Pods for testing

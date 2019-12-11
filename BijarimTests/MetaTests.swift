@@ -51,15 +51,15 @@ public	class	TrackDescriptor:	Descriptor	{
 		]
 	}
 	
-	override	public	var classOfMeta: Meta.Type	{
+	public override class var classOfMeta: Meta.Type	{
 		return TrackMeta.self
 	}
 	
 }
 
 public	class	TrackListDescriptor:	MetaListDescriptor	{
-	
-	override	public	var classOfItemMeta:	Meta.Type	{
+
+	public	override	class	var classOfItemMeta:	Meta.Type	{
 		return TrackMeta.self
 	}
 

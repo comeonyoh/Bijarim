@@ -84,7 +84,7 @@ class LocalDescriptor: Descriptor {
 
 class LocalListDescriptor: MetaListDescriptor {
 	
-	override var classOfItemMeta: Meta.Type	{
+	override class var classOfItemMeta: Meta.Type	{
 		return LocalIdentifier.self
 	}
 	

@@ -27,10 +27,10 @@ class FirebaseViewController: UIViewController, RequestQueueStream {
 
         let	queue		=	FirebaseRequestQueue(self)
 		
-		let	request1	=	FirebaseRequest.requestDocuments({ (store) -> (Bool, [FirebasePathItem]) in
-
+		let	request1	=	FirebaseRequest.requestDocuments(DocumentListDescriptor(), { (store) -> (Bool, [FirebasePathItem]) in
+			
 			return (true, [FirebasePathItem(path: "address_samples", pathType: .collection)])
-
+			
 		}) { (response) in
 
 			if let metaResponse	=	response	as?	MetaResponse	{

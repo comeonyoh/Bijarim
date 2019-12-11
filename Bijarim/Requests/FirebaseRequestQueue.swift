@@ -53,6 +53,10 @@ public	class FirebaseRequest: Request	{
 	public	weak	var	store:	Firestore?
 		
 	public	var paths:	[FirebasePathItem]?
+
+	public override class var descriptor: Descriptor?	{
+		return MetaListDescriptor()
+	}
 	
 	public override		var	canStartTaskAutomatically: Bool	{
 		return true
@@ -88,7 +92,7 @@ public	class FirebaseRequest: Request	{
 	}
 	
 	//	Short cut APIs.
-	static	func	requestDocuments(_ condition: @escaping RequestCondition, with completion: @escaping RequstCompletion) -> Request {
+	static	func	requestDocuments(_ desriptor: MetaListDescriptor,	_ condition: @escaping RequestCondition,	with completion: @escaping RequstCompletion) -> Request {
 
 		return	FirebaseRequest.request { (request, object) in
 
@@ -108,7 +112,7 @@ public	class FirebaseRequest: Request	{
 							list.append(document.documentID)
 						}
 
-						completion(MetaResponse(.success, list, descriptor: self.descriptor as! MetaListDescriptor))
+						completion(MetaResponse(.success, list, descriptor: desriptor))
 						request.finish()
 					}
 

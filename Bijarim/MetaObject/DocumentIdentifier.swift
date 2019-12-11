@@ -23,10 +23,6 @@ class DocumentDescriptor: Descriptor {
 
 class DocumentListDescriptor: MetaListDescriptor {
 	
-	override var classOfItemMeta: Meta.Type	{
-		return DocumentIdentifier.self
-	}
-	
 	override class var descriptors: [DescriptorValue]?	{
 		return DocumentDescriptor.descriptors
 	}
