@@ -14,14 +14,14 @@ public	class	RequestLoader: FirebaseRequestQueue {
 
 	internal	var	activeSections:	[RequestSection]!
 
-	func validateActiveSections() {
+	public	func validateActiveSections() {
 
 		activeSections	=	sections.filter({ (section) -> Bool in
 			return section.isActiveSection
 		})
 	}
 	
-	func startRequests() {
+	public	func startRequests() {
 		for section in activeSections {
 			self.addOperation(section)
 		}

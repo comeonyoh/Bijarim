@@ -50,13 +50,45 @@ public	class FirebaseRequest: Request	{
 
 	typealias RequestCondition	=	(_ store: Firestore?)	->	(Bool,	[FirebasePathItem])
 	
-	weak	var	store:	Firestore?
+	public	weak	var	store:	Firestore?
 		
-	override	var	requestTaskObject: AnyObject?	{
+	public	var paths:	[FirebasePathItem]?
+	
+	public override		var	canStartTaskAutomatically: Bool	{
+		return true
+	}
+	
+	public	override	var	requestTaskObject: AnyObject?	{
 		return store
 	}
 	
-	static	func requestDocuments(_ condition: @escaping RequestCondition, with completion: @escaping RequstCompletion) -> Request {
+	public override		func	requestWillStart() {
+		
+		guard	let	store	=	store,	let	path	=	paths	else	{	return	}
+		
+		self.task	=	{	(request, object) in
+			
+			FirebaseRequest.convertFirebasePathItemToActiveCollectionReference(store, path: path)?.getDocuments(completion: { (snapshot, error) in
+				
+				if	let	snapshot	=	snapshot,	error	==	nil	{
+					var list		=	[String]()
+					
+					for document in snapshot.documents	{
+						list.append(document.documentID)
+					}
+					
+					request.finish(MetaResponse(.success, list, descriptor: type(of: self).descriptor as! MetaListDescriptor))
+				}
+				
+				else	if	let	err	=	error{
+					request.finish(Response(err))
+				}
+			})
+		}
+	}
+	
+	//	Short cut APIs.
+	static	func	requestDocuments(_ condition: @escaping RequestCondition, with completion: @escaping RequstCompletion) -> Request {
 
 		return	FirebaseRequest.request { (request, object) in
 
@@ -76,7 +108,7 @@ public	class FirebaseRequest: Request	{
 							list.append(document.documentID)
 						}
 
-						completion(MetaResponse(.success, list, descriptor: DocumentListDescriptor()))
+						completion(MetaResponse(.success, list, descriptor: self.descriptor as! MetaListDescriptor))
 						request.finish()
 					}
 

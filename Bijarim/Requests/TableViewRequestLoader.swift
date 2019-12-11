@@ -10,26 +10,58 @@ import UIKit
 
 public	class TableViewSection: RequestSection {
 	
-	func numberOfRows(_ tableView: UITableView) -> Int {
-		return 0
+	private	var list: MetaList<Meta>?
+	
+	public	override	class	var descriptor:	Descriptor?	{
+		return	MetaListDescriptor()
+	}
+
+	public	func numberOfRows(_ tableView: UITableView) -> Int {
+		guard	let	list	=	list	else	{ return 0 }
+		return list.count
 	}
 	
-	func invalidateCell(_ tableView: UITableView, at indexPath:	IndexPath)	->	UITableViewCell{
-		return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+	public	func invalidateCell(_ tableView: UITableView, at indexPath:	IndexPath)	->	UITableViewCell{
+		
+		let	cell	=	tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+		cell.textLabel?.text	=	self.list?[indexPath.row]?.identifier
+
+		return	cell
 	}
+
+	public override func requestDidFinished(response: Response) {
+		
+		if	let	result	=	response	as?	MetaResponse	{
+			list		=	result.list
+		}
+	}
+	
 }
 
 public	class TableViewRequestLoader: RequestLoader {
 
-	public	var tableView: UITableView!
+	public	weak	var tableView: UITableView!
 	
 	public	override	subscript(position: Int)	->	TableViewSection? {
 		guard let section	=	activeSections[position]	as?	TableViewSection	else	{	return	nil	}
 		return section
 	}
+	
+	override	func operationCountDidChanged(_ spare: [Operation]?, by queue: OperationQueue) {
+		
+		if	let	spare	=	spare, spare.count	==	0	{
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
+		}
+	}
 }
 
 extension	TableViewRequestLoader:	UITableViewDataSource	{
+	
+	public func numberOfSections(in tableView: UITableView) -> Int {
+		return activeSections.count
+	}
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		guard	let	section	=	self[section]	else	{	return 0	}
@@ -37,24 +69,24 @@ extension	TableViewRequestLoader:	UITableViewDataSource	{
 	}
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard	let	section	=	self[indexPath.row]	else	{	return UITableViewCell()	}
+		guard	let	section	=	self[indexPath.section]	else	{	return UITableViewCell()	}
 		return section.invalidateCell(tableView, at: indexPath)
 	}
 }
 
-extension	TableViewRequestLoader:	UITableViewDelegate	{
+extension	TableViewRequestLoader:	UITableViewDelegate		{
 	
 }
 
 
 
-class	TableViewController:	UIViewController {
+public	class	TableViewController:	UIViewController {
 	
 	@IBOutlet	var	dataLoader:	TableViewRequestLoader!
 	
 	@IBOutlet	weak	var	tableView:	UITableView!
 
-	var forceProtocolToLoader	=	true	{
+	public	var forceProtocolToLoader	=	true	{
 		
 		didSet	{
 			
@@ -71,9 +103,10 @@ class	TableViewController:	UIViewController {
 		}
 	}
 	
-	override func viewDidLoad() {
+	public	override func viewDidLoad() {
 		super.viewDidLoad()
 		forceProtocolToLoader	=	true
+		dataLoader.tableView	=	tableView
 		dataLoader.validateActiveSections()
 		dataLoader.startRequests()
 	}

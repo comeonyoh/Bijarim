@@ -9,7 +9,7 @@
 import UIKit
 
 class MultipleSectionViewController: TableViewController {
-
+	
 }
 
 class FirebaseSection1: TableViewSection {
@@ -20,6 +20,17 @@ class FirebaseSection1: TableViewSection {
 			return "Firebase1"
 		}
 	}
+	
+	override var paths: [FirebasePathItem]?	{
+		set {}
+		get {
+			return [FirebasePathItem(path: "address_samples", pathType: .collection)]
+		}
+	}
+	
+	override class var descriptor: Descriptor?	{
+		return DocumentListDescriptor()
+	}
 }
 
 class FirebaseSection2: TableViewSection {
@@ -29,5 +40,16 @@ class FirebaseSection2: TableViewSection {
 		get	{
 			return "Firebase2"
 		}
+	}
+
+	override var paths: [FirebasePathItem]?	{
+		set {}
+		get {
+			return [FirebasePathItem(path: "example_accounts", pathType: .collection)]
+		}
+	}
+	
+	override class var descriptor: Descriptor?	{
+		return DocumentListDescriptor()
 	}
 }

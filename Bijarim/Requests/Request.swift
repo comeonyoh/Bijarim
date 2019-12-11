@@ -8,15 +8,6 @@
 
 import Foundation
 
-
-protocol	RequestStream {
-	
-	//	Condition for whether start tasking or not.
-	func requestWillBegin() -> Bool
-	
-	func requestDidFinished()
-}
-
 typealias RequestTask		=	(_ request: Request, _ object: AnyObject?)	->	Void
 typealias RequstCompletion	=	(_ response: Response)						->	Void
 
@@ -27,7 +18,7 @@ protocol RequestComponent: NSObjectProtocol {
 
 public	class	Request:	Operation,	RequestComponent	{
 	
-	enum State:	String {
+	public	enum State:	String {
 		case executing, finished, ready
 		
 		var keyPath:	String	{
@@ -37,8 +28,12 @@ public	class	Request:	Operation,	RequestComponent	{
 
 	var task:		RequestTask?
 	var completion:	RequstCompletion?
-	
-	var state:	State	=	.ready	{
+
+	public	class	var descriptor:	Descriptor?	{
+		return	nil
+	}
+
+	public	var state:	State	=	.ready	{
 		willSet	{
 			willChangeValue(forKey: state.keyPath)
 			willChangeValue(forKey: newValue.keyPath)
@@ -52,22 +47,39 @@ public	class	Request:	Operation,	RequestComponent	{
 	
 	public	override func start() {
 
-		if requestWillBegin() {
+		if	canStartTaskAutomatically	{
+			requestWillStart()
 			main()
 			state	=	.executing
 			task?(self, requestTaskObject)
 		}
+		else	{
+			finish(Response(.fail))
+		}
 	}
 	
 	func finish() {
+		finish(Response(.success))
+	}
+	
+	func finish(_ response: Response) {
 		state	=	.finished
-		requestDidFinished()
+		requestDidFinished(response: response)
 	}
 	
-	func taskObject() -> AnyObject? {
-		return nil
+	public	var	canStartTaskAutomatically:	Bool	{
+		return true
 	}
 	
+	public	func requestWillStart() {
+		
+	}
+	
+	public	func requestDidFinished(response: Response) {
+		completion?(response)
+	}
+
+	//	State related API family.
 	public	override var isReady: Bool	{
 		return super.isReady	&&	state	==	.ready
 	}
@@ -80,12 +92,13 @@ public	class	Request:	Operation,	RequestComponent	{
 		return state	==	.finished
 	}
 	
-	var requestTaskObject: AnyObject?	{
+	public	var requestTaskObject: AnyObject?	{
 		return nil
 	}
 
-	//	Creat request API family.
 	
+	
+	//	Creat request API family.
 	override init() {
 		super.init()
 	}
@@ -104,16 +117,5 @@ public	class	Request:	Operation,	RequestComponent	{
 
 	static	func request(_ task: @escaping RequestTask, with completion: @escaping RequstCompletion) -> Self {
 		return self.init(task, with: completion)
-	}
-}
-
-extension	Request:	RequestStream	{
-	
-	func requestWillBegin() -> Bool {
-		return true
-	}
-	
-	func requestDidFinished() {
-		
 	}
 }

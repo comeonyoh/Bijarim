@@ -66,6 +66,7 @@ class FirebaseViewController: UIViewController, RequestQueueStream {
 				})
 			}
 		}
+		
 		request2.completion	=	{	response in
 			
 			if let metaResponse	=	response	as?	MetaResponse	{

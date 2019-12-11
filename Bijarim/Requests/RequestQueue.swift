@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objc
 protocol	RequestQueueStream: NSObjectProtocol {
 	
 	func operationCountDidChanged(_ spare: [Operation]?, by queue: OperationQueue)

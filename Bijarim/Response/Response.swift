@@ -10,13 +10,14 @@ import Foundation
 
 enum ResponseCode: Int {
 	case success	=	200
+	case fail		=	400
 }
 
 struct ReponseResult {
 	var code: ResponseCode
 }
 
-class Response {
+public	class Response {
 	
 	var error:	Error?
 	var result: ReponseResult?
@@ -31,7 +32,7 @@ class Response {
 	
 }
 
-class MetaResponse	: Response {
+public	class MetaResponse	: Response {
 	
 	var data:	Meta?
 	var list:	MetaList<Meta>?
