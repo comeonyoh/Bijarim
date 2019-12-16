@@ -8,32 +8,48 @@
 
 import Foundation
 
-class Team: Meta {
+class Grade: Meta {
 	@objc	dynamic	var name: String!
-	@objc	dynamic	var country: String!
+	dynamic	var level:	NSNumber!
 }
 
 class SoccerPlayer: Meta {
 	
-	dynamic	var rank: Int!
+	@objc	dynamic	var	rank: NSNumber!
 	@objc	dynamic	var name: String!
 	@objc	dynamic	var imagePath: String?
-	@objc	dynamic	var	team:	Team!
+	@objc	dynamic	var	grade:	Grade!
 	
 	override var description: String	{
-		return "Name: \(String(describing: name)), Rank: \(String(describing: rank)), path: \(String(describing: imagePath))"
+		return "Name: \(String(describing: name)), Rank: \(String(describing: rank)), path: \(String(describing: imagePath)), grade_name: \(String(describing: self.grade.name))"
+	}
+}
+
+class GradeDescriptor: Descriptor {
+	
+	override class var classOfMeta: Meta.Type	{
+		return Grade.self
+	}
+	
+	override public	class var descriptors: [DescriptorValue]?	{
+
+		return [
+			DescriptorValue(from: "name", to: "name"),
+			IntDescriptorValue(from: "grade", to: "grade"),
+		]
 	}
 }
 
 class SoccerPlayerDescriptor: Descriptor {
 	
 	override public	class var descriptors: [DescriptorValue]?	{
+
 		return [
 			DescriptorValue(from: "id", to: "identifier"),
 			DescriptorValue(from: "name", to: "name"),
-			DescriptorValue(from: "rank", to: "rank"),
+			IntDescriptorValue(from: "rank", to: "rank"),
 			DescriptorValue(from: "imagePath", to: "imagePath"),
-			DescriptorValue(from: "team_info", to: "team")
+			DescriptorValue(from: "grade", to: "grade")
 		]
 	}
 }

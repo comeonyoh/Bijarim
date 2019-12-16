@@ -8,12 +8,34 @@
 
 import Foundation
 
-
-public	struct	DescriptorValue {
+public	class	DescriptorValue {
 	
-	var from:	String
-	var to:		String
+	internal	var	to:	String
+	internal	var from: String
+
+	public	init(from: String, to: String) {
+		self.to		=	to
+		self.from	=	from
+	}
+	
+	func setValue(meta: Meta, value: Any) {
+		meta.setValue(value, forKey: to)
+	}
 }
+
+public	class	StringDescriptorValue:	DescriptorValue {}
+
+public	class	IntDescriptorValue:	DescriptorValue {
+	
+	override func setValue(meta: Meta, value: Any) {
+
+		if	let	intValue	=	value	as?	Int	{
+			meta.setValue(NSNumber(value: intValue), forKey: to)
+		}
+	}
+}
+
+
 
 public	class	Descriptor {
 	
@@ -132,10 +154,10 @@ public	class	MetaListDescriptor:	Descriptor	{
 			for descriptor in descriptors	{
 
 				if	let	value	=	data	as? String	{
-					meta.setValue(value, forKey: descriptor.to)
+					descriptor.setValue(meta: meta, value: value)
 				}
-				else if	let	dict	=	data	as?	[String:	Any]	{
-					meta.setValue(dict[descriptor.from], forKey: descriptor.to)
+				else if	let	dict	=	data	as?	[String:	Any],	let	value	=	dict[descriptor.from]	{
+					descriptor.setValue(meta: meta, value: value)
 				}
 			}
 
