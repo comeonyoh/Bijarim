@@ -10,7 +10,7 @@ import UIKit
 
 final	class LocalViewController: UIViewController {
 	
-	var data:	MetaList<Meta>?
+	var data:	LocalIdentiferList!
 	
 	@IBOutlet weak var tableView: UITableView!
 	
@@ -21,7 +21,7 @@ final	class LocalViewController: UIViewController {
 		let	request1	=	Request.request { (req, _) in
 
 			if	let path	=	Bundle.main.path(forResource: "Info", ofType: "plist"), let info	=	NSDictionary(contentsOfFile: path)	{
-				self.data	=	LocalListDescriptor().parseRawData(info.allKeys)
+				self.data	=	LocalIdentiferList(info.allKeys)
 			}
 			
 			req.finish()
@@ -33,8 +33,8 @@ final	class LocalViewController: UIViewController {
 			}
 			req.finish()
 		}
-		
-		let	queue	=	SerializeQueue(self)
+
+		let	queue		=	SerializeQueue(self)
 
 		queue.addOperation(request1)
 		queue.addOperation(request2)
@@ -53,10 +53,8 @@ extension	LocalViewController:	UITableViewDataSource	{
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 		
-		if	let	meta	=	self.data?[indexPath.row]	as?	LocalIdentifier	{
-			cell.textLabel?.text	=	meta.identifier
-		}
-		
+		cell.textLabel?.text	=	self.data?[indexPath.row]?.identifier
+
 		return cell
 	}
 }
@@ -69,26 +67,19 @@ extension	LocalViewController:	RequestQueueStream		{
 }
 
 
-class LocalIdentifier: Meta {
-}
 
-class LocalDescriptor: Descriptor {
+class LocalIdentifier: Meta {
 	
-	override public	class var descriptors: [DescriptorValue]?	{
-		return [
-			//	"" means the key value from remote is nil.
-			DescriptorValue(from: "", to: "identifier")
+	override var descriptors: [Descriptor]	{
+		return	[
+			Descriptor(from: "", to: "identifier")
 		]
 	}
 }
 
-class LocalListDescriptor: MetaListDescriptor {
+class LocalIdentiferList: MetaList	<LocalIdentifier> {
 	
-	override class var classOfItemMeta: Meta.Type	{
-		return LocalIdentifier.self
-	}
-	
-	override class var descriptors: [DescriptorValue]?	{
-		return LocalDescriptor.descriptors
+	override var classOfItemMeta: Meta.Type	{
+		return	LocalIdentifier.self
 	}
 }

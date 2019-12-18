@@ -28,8 +28,8 @@ class FirebaseSection1: TableViewSection {
 		}
 	}
 	
-	override class var descriptor: Descriptor?	{
-		return DocumentListDescriptor()
+	override	public	var classOfResponse:	MetaList<Meta>.Type?	{
+		return	DocumentList<DocumentIdentifier>.self
 	}
 }
 
@@ -48,8 +48,8 @@ class FirebaseSection2: TableViewSection {
 			return [FirebasePathItem(path: "example_accounts", pathType: .collection)]
 		}
 	}
-	
-	override class var descriptor: Descriptor?	{
-		return DocumentListDescriptor()
+
+	override	public	var classOfResponse:	MetaList<Meta>.Type?	{
+		return	DocumentList<DocumentIdentifier>.self
 	}
 }

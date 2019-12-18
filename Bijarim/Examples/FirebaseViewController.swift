@@ -16,31 +16,30 @@ class FirebaseViewController: UIViewController, RequestQueueStream {
 		case document
 	}
 
-	var addressSamples:			MetaList<Meta>?
-	var documentIdentifiers:	MetaList<Meta>?
+	var addressSamples:			DocumentList<DocumentIdentifier>?
+	var documentIdentifiers:	DocumentList<DocumentIdentifier>?
 
 	@IBOutlet weak var tableView: UITableView!
 	
     override func viewDidLoad() {
 		
         super.viewDidLoad()
-
+		
         let	queue		=	FirebaseRequestQueue(self)
 		
-		let	request1	=	FirebaseRequest.requestDocuments(DocumentListDescriptor(), { (store) -> (Bool, [FirebasePathItem]) in
+		let	request1	=	FirebaseRequest.requestDocuments(descriptor: DocumentList<DocumentIdentifier>.self, { (store) -> (Bool, [FirebasePathItem]) in
 			
 			return (true, [FirebasePathItem(path: "address_samples", pathType: .collection)])
 			
-		}) { (response) in
-
+		})	{	(response) in
+			
 			if let metaResponse	=	response	as?	MetaResponse	{
-				self.addressSamples	=	metaResponse.list
+				self.addressSamples	=	metaResponse.list	as?	DocumentList<DocumentIdentifier>
 			}
 		}
-		
-		let	request2		=	FirebaseRequest()
+		let	request2	=	FirebaseRequest()
 
-		request2.task		=	{	(request, object) in
+		request2.task	=	{	(request, object) in
 			
 			if	let	firebase	=	request	as?	FirebaseRequest,	let	store	=	firebase.store	{
 				
@@ -56,7 +55,7 @@ class FirebaseViewController: UIViewController, RequestQueueStream {
 							list.append(document.documentID)
 						}
 						
-						request.completion?(MetaResponse(.success, list, descriptor: DocumentListDescriptor()))
+						request.completion?(MetaResponse(.success, list, descriptor: DocumentList.self))
 						request.finish()
 					}
 					
@@ -66,11 +65,10 @@ class FirebaseViewController: UIViewController, RequestQueueStream {
 				})
 			}
 		}
-		
 		request2.completion	=	{	response in
 			
 			if let metaResponse	=	response	as?	MetaResponse	{
-				self.documentIdentifiers	=	metaResponse.list
+				self.documentIdentifiers	=	metaResponse.list as? DocumentList<DocumentIdentifier>
 			}
 		}
 		

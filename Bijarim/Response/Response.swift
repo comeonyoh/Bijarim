@@ -28,21 +28,19 @@ public	class Response {
 	
 	init(_ code: ResponseCode) {
 		self.result	=	ReponseResult(code: code)
-	}
-	
+	}	
 }
 
 public	class MetaResponse	: Response {
 	
-	var data:	Meta?
 	var list:	MetaList<Meta>?
 	
-	required	init (_ code: ResponseCode, _ list: [Any]?, descriptor creator:	MetaListDescriptor) {
+	required	init (_ code: ResponseCode,	_ list: [Any]?	=	nil,	descriptor	classOfResponse:	MetaList<Meta>.Type) {
 
 		super.init(code)
 
-		if	let	list		=	list	{
-			self.list		=	creator.parseRawData(list)
+		if	let	list	=	list	{
+			self.list	=	classOfResponse.init(list)
 		}
 	}
 }

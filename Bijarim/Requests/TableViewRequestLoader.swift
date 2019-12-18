@@ -10,32 +10,17 @@ import UIKit
 
 public	class TableViewSection: RequestSection {
 	
-	private	var list: MetaList<Meta>?
-	
-	public	override	class	var descriptor:	Descriptor?	{
-		return	MetaListDescriptor()
-	}
-
 	public	func numberOfRows(_ tableView: UITableView) -> Int {
-		guard	let	list	=	list	else	{ return 0 }
-		return list.count
+		return self.numberOfItems
 	}
 	
 	public	func invalidateCell(_ tableView: UITableView, at indexPath:	IndexPath)	->	UITableViewCell{
 		
 		let	cell	=	tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-		cell.textLabel?.text	=	self.list?[indexPath.row]?.identifier
+		cell.textLabel?.text	=	self[indexPath.row]?.identifier
 
 		return	cell
 	}
-
-	public override func requestDidFinished(response: Response) {
-		
-		if	let	result	=	response	as?	MetaResponse	{
-			list		=	result.list
-		}
-	}
-	
 }
 
 public	class TableViewRequestLoader: RequestLoader {

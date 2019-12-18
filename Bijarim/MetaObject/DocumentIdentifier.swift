@@ -9,21 +9,17 @@
 import Foundation
 
 class DocumentIdentifier: Meta {
-}
-
-class DocumentDescriptor: Descriptor {
 	
-	override public	class var descriptors: [DescriptorValue]?	{
-		return [
-			//	"" means the key value from remote is nil.
-			DescriptorValue(from: "", to: "identifier")
+	override var descriptors: [Descriptor]	{
+		return	[
+			Descriptor(from: "", to: "identifier")
 		]
 	}
 }
 
-class DocumentListDescriptor: MetaListDescriptor {
+class DocumentList	<T:	DocumentIdentifier>	:	MetaList<Meta> {
 	
-	override class var descriptors: [DescriptorValue]?	{
-		return DocumentDescriptor.descriptors
+	override var classOfItemMeta: Meta.Type	{
+		return	DocumentIdentifier.self
 	}
 }

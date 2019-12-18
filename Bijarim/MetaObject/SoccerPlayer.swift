@@ -8,60 +8,46 @@
 
 import Foundation
 
-class Grade: Meta {
+public	class Grade: Meta {
 	@objc	dynamic	var name: String!
 	dynamic	var level:	NSNumber!
+	
+	public override var descriptors: [Descriptor]	{
+		return	[
+			StringDescriptor(from: "name", to: "name")	,
+			IntDescriptor(from: "level", to: "level")
+		]
+	}
 }
 
-class SoccerPlayer: Meta {
+public	class	GradeDescriptor:	CustomDescriptor	{
+	
+	public override var metaClass: Meta.Type	{
+		return	Grade.self
+	}
+}
+
+public	class	SoccerPlayer: Meta {
 	
 	@objc	dynamic	var	rank: NSNumber!
 	@objc	dynamic	var name: String!
 	@objc	dynamic	var imagePath: String?
-	@objc	dynamic	var	grade:	Grade!
-	
-	override var description: String	{
-		return "Name: \(String(describing: name)), Rank: \(String(describing: rank)), path: \(String(describing: imagePath)), grade_name: \(String(describing: self.grade.name))"
-	}
-}
+	@objc	dynamic	var	grade:	Grade?
 
-class GradeDescriptor: Descriptor {
-	
-	override class var classOfMeta: Meta.Type	{
-		return Grade.self
-	}
-	
-	override public	class var descriptors: [DescriptorValue]?	{
-
-		return [
-			DescriptorValue(from: "name", to: "name"),
-			IntDescriptorValue(from: "grade", to: "grade"),
+	public override var descriptors: [Descriptor]	{
+		return	[
+			StringDescriptor(from: "id", to: "identifier")			,
+			IntDescriptor(from: "rank", to: "rank")					,
+			StringDescriptor(from: "imagePath", to: "imagePath")	,
+			StringDescriptor(from: "name", to: "name")				,
+			GradeDescriptor(from: "grade", to: "grade")
 		]
 	}
 }
 
-class SoccerPlayerDescriptor: Descriptor {
+class SoccerPlayerList	<T:	SoccerPlayer>	:	MetaList	<Meta> {
 	
-	override public	class var descriptors: [DescriptorValue]?	{
-
-		return [
-			DescriptorValue(from: "id", to: "identifier"),
-			DescriptorValue(from: "name", to: "name"),
-			IntDescriptorValue(from: "rank", to: "rank"),
-			DescriptorValue(from: "imagePath", to: "imagePath"),
-			DescriptorValue(from: "grade", to: "grade")
-		]
+	override var classOfItemMeta: Meta.Type	{
+		return	SoccerPlayer.self
 	}
 }
-
-class SoccerPlayerListDescriptor: MetaListDescriptor {
-
-	override class var classOfItemMeta: Meta.Type	{
-		return SoccerPlayer.self
-	}
-	
-	override class var descriptors: [DescriptorValue]?	{
-		return SoccerPlayerDescriptor.descriptors
-	}
-}
-

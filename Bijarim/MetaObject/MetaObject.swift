@@ -8,7 +8,7 @@
 
 import Foundation
 
-public	class	DescriptorValue {
+public	class	Descriptor {
 	
 	internal	var	to:	String
 	internal	var from: String
@@ -23,51 +23,41 @@ public	class	DescriptorValue {
 	}
 }
 
-public	class	StringDescriptorValue:	DescriptorValue {}
+public	class	StringDescriptor:	Descriptor	{
+	
+}
 
-public	class	IntDescriptorValue:	DescriptorValue {
+public	class	IntDescriptor:	Descriptor	{
 	
 	override func setValue(meta: Meta, value: Any) {
-
-		if	let	intValue	=	value	as?	Int	{
-			meta.setValue(NSNumber(value: intValue), forKey: to)
-		}
-	}
-}
-
-
-
-public	class	Descriptor {
-	
-	public	var name:	String?	{
-		return nil
-	}
-	
-	public	class	var	descriptors:	[DescriptorValue]?	{
-		return []
-	}
-	
-	public	class	var classOfMeta:	Meta.Type	{
-		return Meta.self
-	}
-
-	//	help parsing raw-data with descriptors and creating new one.
-	public	func parseRawData(_ rawData: [String: Any])	->	Meta {
-
-		let	meta	=	type(of: self).classOfMeta.init()
 		
-		guard let descriptors = type(of: self).descriptors else { return meta }
-
-		for descriptor in descriptors	{
-			if	let	value	=	rawData[descriptor.from]	{
-				meta.setValue(value, forKey: descriptor.to)
-			}
+		if	let	intValue	=	value	as?	Int	{
+			super.setValue(meta: meta, value: NSNumber(value: intValue))
 		}
+		else	{
+			super.setValue(meta: meta, value: value)
+		}
+	}
+}
 
-		return meta
+public	class	CustomDescriptor:	Descriptor	{
+	
+	public	var	metaClass:	Meta.Type	{
+		return	Meta.self
 	}
 	
+	public	override func setValue(meta: Meta, value: Any) {
+		
+		if	let	map	=	value	as?	[String	:	Any]	{
+			meta.setValue(metaClass.init(map), forKey: to)
+		}
+		else	{
+			super.setValue(meta: meta, value: value)
+		}
+	}
 }
+
+
 
 public	class	Meta:	NSObject	{
 
@@ -76,9 +66,24 @@ public	class	Meta:	NSObject	{
 	private	lazy	var	dictionary: [String: Any]	=	{
 		return	[String	:	Any]()
 	}()
-	
-	required	override	public	init() {
+
+	required	public override init() {
 		super.init()
+	}
+	
+	required	public	init(_	rawData:	Any) {
+		
+		super.init()
+		
+		for	descriptor	in	descriptors	{
+			
+			if	let	dict	=	rawData	as?	[String:	Any],	let	value	=	dict[descriptor.from]	{
+				descriptor.setValue(meta: self, value: value)
+			}
+			else	if	let	value	=	rawData	as?	String	{
+				descriptor.setValue(meta: self, value: value)
+			}
+		}
 	}
 	
 	public override func setValue(_ value: Any?, forUndefinedKey key: String) {
@@ -89,10 +94,15 @@ public	class	Meta:	NSObject	{
 		return	dictionary[key]
 	}
 	
+	public	var	descriptors:	[Descriptor]	{
+		
+		return	[
+		
+		]
+	}
 }
 
-
-public	class	MetaList<T:	Meta>:	Meta	{
+public	class	MetaList<T:	Meta>:	NSObject	{
 	
 	private	lazy	var list:	[T]?	=	{
 		
@@ -102,6 +112,22 @@ public	class	MetaList<T:	Meta>:	Meta	{
 	
 	public	func appendItem(_ item: T) {
 		list?.append(item)
+	}
+	
+	required	public	init(_	rawData:	[Any]) {
+		
+		super.init()
+		
+		for	data	in	rawData	{
+
+			if	let	meta	=	classOfItemMeta.init(data)	as?	T	{
+				self.appendItem(meta)
+			}
+		}
+	}
+	
+	public	var classOfItemMeta:	Meta.Type	{
+		return Meta.self
 	}
 }
 
@@ -131,40 +157,3 @@ extension	MetaList:	Collection	{
 		return	list.index(after: i)
 	}
 }
-
-public	class	MetaListDescriptor:	Descriptor	{
-	
-	public	class	var classOfItemMeta:	Meta.Type	{
-		return Meta.self
-	}
-	
-	public override class var classOfMeta: Meta.Type	{
-		return MetaList.self
-	}
-	
-	public func parseRawData(_ rawData: [Any])	->	MetaList<Meta> {
-		
-		guard	let	list	=	type(of: self).classOfMeta.init()	as?	MetaList	<Meta>	else { return MetaList() }
-		
-		for	data	in	rawData	{
-
-			let	meta	=	type(of: self).classOfItemMeta.init()
-			guard	let	descriptors	=	type(of: self).descriptors	else { return MetaList() }
-
-			for descriptor in descriptors	{
-
-				if	let	value	=	data	as? String	{
-					descriptor.setValue(meta: meta, value: value)
-				}
-				else if	let	dict	=	data	as?	[String:	Any],	let	value	=	dict[descriptor.from]	{
-					descriptor.setValue(meta: meta, value: value)
-				}
-			}
-
-			list.appendItem(meta)
-		}
-		
-		return list
-	}
-}
-

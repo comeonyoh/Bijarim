@@ -54,8 +54,8 @@ public	class FirebaseRequest: Request	{
 		
 	public	var paths:	[FirebasePathItem]?
 
-	public override class var descriptor: Descriptor?	{
-		return MetaListDescriptor()
+	public	var classOfResponse:	MetaList<Meta>.Type?	{
+		return	MetaList<Meta>.self
 	}
 	
 	public override		var	canStartTaskAutomatically: Bool	{
@@ -87,7 +87,9 @@ public	class FirebaseRequest: Request	{
 						}
 					}
 					
-					request.finish(MetaResponse(.success, list, descriptor: type(of: self).descriptor as! MetaListDescriptor))
+					if	let	classOfResponse	=	self.classOfResponse	{
+						request.finish(MetaResponse(.success, list, descriptor: classOfResponse))
+					}
 				}
 				
 				else	if	let	err	=	error{
@@ -98,7 +100,7 @@ public	class FirebaseRequest: Request	{
 	}
 	
 	//	Short cut APIs.
-	static	func	requestDocuments(_ desriptor: MetaListDescriptor,	_ condition: @escaping RequestCondition,	with completion: @escaping RequstCompletion) -> Request {
+	static	func	requestDocuments(descriptor	classOfResponse:	MetaList<Meta>.Type,	_ condition: @escaping RequestCondition,	with completion: @escaping RequstCompletion) -> Request {
 
 		return	FirebaseRequest.request { (request, object) in
 
@@ -113,12 +115,12 @@ public	class FirebaseRequest: Request	{
 					if let snapshot	=	snapshot, error	==	nil	{
 
 						var list	=	[String]()
-						
+
 						for document in snapshot.documents	{
 							list.append(document.documentID)
 						}
 
-						completion(MetaResponse(.success, list, descriptor: desriptor))
+						completion(MetaResponse(.success, list, descriptor: classOfResponse))
 						request.finish()
 					}
 
@@ -128,7 +130,7 @@ public	class FirebaseRequest: Request	{
 					}
 				})
 			}
-				
+
 			else {
 				request.finish()
 			}
@@ -137,6 +139,9 @@ public	class FirebaseRequest: Request	{
 
 }
 
+
+
+//	Extension	for finding right path.
 extension	FirebaseRequest	{
 
 	public	static	func	convertFirebasePathItemToActiveDocumentReference (_ store: Firestore, path items: [FirebasePathItem]) -> DocumentReference? {

@@ -10,29 +10,22 @@ import UIKit
 
 public	class CollectionViewSection: RequestSection {
 	
-	private	var list: MetaList<Meta>?
-	
-	public	override	class	var descriptor:	Descriptor?	{
-		return	MetaListDescriptor()
+	public	class	var	cellIdentifier:	String{
+		return	"Cell"
 	}
-
+	
 	public	func numberOfRows(_ collectionView: UICollectionView) -> Int {
-		guard	let	list	=	list	else	{ return 0 }
-		return list.count
+		return self.numberOfItems
 	}
 	
 	public	func invalidateCell(_ collectionView: UICollectionView, at indexPath:	IndexPath)	->	UICollectionViewCell{
 		
-		return	collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+		return	collectionView.dequeueReusableCell(withReuseIdentifier: type(of: self).cellIdentifier, for: indexPath)
 	}
 
-	public override func requestDidFinished(response: Response) {
-		
-		if	let	result	=	response	as?	MetaResponse	{
-			list		=	result.list
-		}
+	public	func layout(_ collectionView: UICollectionView,	layout	collectionViewLayout:	UICollectionViewLayout,	sizeForItemAt	row:	Int) -> CGSize {
+		return	.zero
 	}
-	
 }
 
 public	class CollectionViewRequestLoader: RequestLoader {
@@ -76,7 +69,20 @@ extension	CollectionViewRequestLoader:	UICollectionViewDelegate	{
 	
 }
 
+extension	CollectionViewRequestLoader:	UICollectionViewDelegateFlowLayout	{
+	
+	public	func	collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets					{	return	.zero	}
 
+	public	func	collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat			{	return	5	}
+
+    public	func	collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat	{	return	5	}
+
+	public	func	collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+		guard	let	section	=	self[indexPath.section]	else	{	return .zero	}
+		return	section.layout(collectionView, layout: collectionViewLayout, sizeForItemAt: indexPath.row)
+	}
+}
 
 public	class	CollectionViewController:	UIViewController {
 	
