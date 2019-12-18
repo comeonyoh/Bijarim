@@ -53,3 +53,21 @@ class FirebaseSection2: TableViewSection {
 		return	DocumentList<DocumentIdentifier>.self
 	}
 }
+
+
+
+class DocumentIdentifier: Meta {
+	
+	override var descriptors: [Descriptor]	{
+		return	[
+			Descriptor(from: "", to: "identifier")
+		]
+	}
+}
+
+class DocumentList	<T:	DocumentIdentifier>	:	MetaList<Meta> {
+	
+	override var classOfItemMeta: Meta.Type	{
+		return	DocumentIdentifier.self
+	}
+}

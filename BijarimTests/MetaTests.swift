@@ -19,14 +19,14 @@ class MetaTests: XCTestCase {
 			["track_title"	:	"Career High"]
 		]
 
-		let	tracks	=	TrackListDescriptor().parseRawData(list)
-			
-		for (idx, _) in tracks.enumerated()	{
-				
-			let	originValue	=	list[idx]["track_title"]
-			if	let	track	=	tracks[idx]	as?	TrackMeta	{
-				XCTAssertEqual(originValue, track.title)
-			}
+		let	track1	=	TrackMeta(list.first!)
+		XCTAssertEqual(track1.title, list.first?["track_title"])
+		
+		let	tracks	=	TrackMetaList(list)
+		XCTAssertEqual(tracks.count, list.count)
+		
+		if	let	track	=	tracks.first	as?	TrackMeta	{
+			XCTAssertEqual(track.title, list.first?["track_title"])
 		}
     }
 }
@@ -40,31 +40,16 @@ public	class	TrackMeta:	Meta	{
 	
 	@objc	dynamic	var	title:	String!
 
-}
-
-public	class	TrackDescriptor:	Descriptor	{
-
-	override	public	class	var	descriptors:	[DescriptorValue]?	{
-		return [
-			DescriptorValue(from: "track_title", to: "title"),
-			DescriptorValue(from: "artist_title", to: "artist_title"),
+	public override var descriptors: [Descriptor]	{
+		return	[
+			StringDescriptor(from: "track_title", to: "title")
 		]
 	}
-	
-	public override class var classOfMeta: Meta.Type	{
-		return TrackMeta.self
-	}
-	
 }
 
-public	class	TrackListDescriptor:	MetaListDescriptor	{
-
-	public	override	class	var classOfItemMeta:	Meta.Type	{
-		return TrackMeta.self
-	}
-
-	public override class var descriptors: [DescriptorValue]?	{
-		return TrackDescriptor.descriptors
-	}
+class TrackMetaList	<T:	TrackMeta>	:	MetaList<Meta> {
 	
+	override var classOfItemMeta: Meta.Type	{
+		return	TrackMeta.self
+	}
 }

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		010EC2C3239A2979005FB9DE /* MetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EC2C2239A2979005FB9DE /* MetaTests.swift */; };
-		01320E49239E57B700AB423D /* DocumentIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01320E48239E57B700AB423D /* DocumentIdentifier.swift */; };
+		012A784323AA054100BCFF11 /* InputDataMachineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A784223AA054100BCFF11 /* InputDataMachineViewController.swift */; };
 		014B46C72395DD0400A17E44 /* MetaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014B46C62395DD0400A17E44 /* MetaObject.swift */; };
 		014DEC3F238CA3DB00B99881 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DEC3E238CA3DB00B99881 /* AppDelegate.swift */; };
 		014DEC41238CA3DB00B99881 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DEC40238CA3DB00B99881 /* SceneDelegate.swift */; };
@@ -22,7 +22,6 @@
 		0150EA02239F181800D3394A /* RequestSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0150EA01239F181800D3394A /* RequestSection.swift */; };
 		0150EA05239F1D2C00D3394A /* MultipleSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0150EA04239F1D2C00D3394A /* MultipleSectionViewController.swift */; };
 		0150EA07239F2B6300D3394A /* TableViewRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0150EA06239F2B6300D3394A /* TableViewRequestLoader.swift */; };
-		01784B0923A0D36400EE2AF1 /* SoccerPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01784B0823A0D36400EE2AF1 /* SoccerPlayer.swift */; };
 		01784B0B23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01784B0A23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift */; };
 		01784B0D23A0E12700EE2AF1 /* ComplexMetaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01784B0C23A0E12700EE2AF1 /* ComplexMetaViewController.swift */; };
 		01AD4004238F50150025B2C6 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AD4003238F50150025B2C6 /* RequestTests.swift */; };
@@ -46,7 +45,7 @@
 
 /* Begin PBXFileReference section */
 		010EC2C2239A2979005FB9DE /* MetaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaTests.swift; sourceTree = "<group>"; };
-		01320E48239E57B700AB423D /* DocumentIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentIdentifier.swift; sourceTree = "<group>"; };
+		012A784223AA054100BCFF11 /* InputDataMachineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataMachineViewController.swift; sourceTree = "<group>"; };
 		014B46C62395DD0400A17E44 /* MetaObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaObject.swift; sourceTree = "<group>"; };
 		014DEC3B238CA3DB00B99881 /* Bijarim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bijarim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		014DEC3E238CA3DB00B99881 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +63,6 @@
 		0150EA01239F181800D3394A /* RequestSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSection.swift; sourceTree = "<group>"; };
 		0150EA04239F1D2C00D3394A /* MultipleSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSectionViewController.swift; sourceTree = "<group>"; };
 		0150EA06239F2B6300D3394A /* TableViewRequestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewRequestLoader.swift; sourceTree = "<group>"; };
-		01784B0823A0D36400EE2AF1 /* SoccerPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoccerPlayer.swift; sourceTree = "<group>"; };
 		01784B0A23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewRequestLoader.swift; sourceTree = "<group>"; };
 		01784B0C23A0E12700EE2AF1 /* ComplexMetaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexMetaViewController.swift; sourceTree = "<group>"; };
 		01AD4003238F50150025B2C6 /* RequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; };
@@ -107,8 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				014B46C62395DD0400A17E44 /* MetaObject.swift */,
-				01320E48239E57B700AB423D /* DocumentIdentifier.swift */,
-				01784B0823A0D36400EE2AF1 /* SoccerPlayer.swift */,
 			);
 			path = MetaObject;
 			sourceTree = "<group>";
@@ -137,9 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				014B46C52395DCF300A17E44 /* MetaObject */,
+				014DEC6E238CA44600B99881 /* Requests */,
 				7B9D19DA239004DF0021D0A0 /* Response */,
 				7B8FF8A1238D4B6F00B16001 /* Examples */,
-				014DEC6E238CA44600B99881 /* Requests */,
 				014DEC3E238CA3DB00B99881 /* AppDelegate.swift */,
 				014DEC40238CA3DB00B99881 /* SceneDelegate.swift */,
 				014DEC44238CA3DB00B99881 /* Main.storyboard */,
@@ -205,6 +201,7 @@
 				7B8FF8A4238D4CE200B16001 /* FirebaseViewController.swift */,
 				0150EA04239F1D2C00D3394A /* MultipleSectionViewController.swift */,
 				01784B0C23A0E12700EE2AF1 /* ComplexMetaViewController.swift */,
+				012A784223AA054100BCFF11 /* InputDataMachineViewController.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -390,14 +387,13 @@
 				7B9D19DC239004F20021D0A0 /* Response.swift in Sources */,
 				7B8FF8A3238D4B8200B16001 /* LocalViewController.swift in Sources */,
 				014B46C72395DD0400A17E44 /* MetaObject.swift in Sources */,
-				01320E49239E57B700AB423D /* DocumentIdentifier.swift in Sources */,
 				0150EA05239F1D2C00D3394A /* MultipleSectionViewController.swift in Sources */,
 				014DEC70238CA45600B99881 /* Request.swift in Sources */,
 				014DEC72238CA47800B99881 /* RequestQueue.swift in Sources */,
-				01784B0923A0D36400EE2AF1 /* SoccerPlayer.swift in Sources */,
 				01784B0B23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift in Sources */,
 				7B8FF8A5238D4CE200B16001 /* FirebaseViewController.swift in Sources */,
 				7B47F10F238D5279001500C0 /* FirebaseRequestQueue.swift in Sources */,
+				012A784323AA054100BCFF11 /* InputDataMachineViewController.swift in Sources */,
 				014DEC3F238CA3DB00B99881 /* AppDelegate.swift in Sources */,
 				0150EA02239F181800D3394A /* RequestSection.swift in Sources */,
 				0150EA00239F16F200D3394A /* RequestLoader.swift in Sources */,

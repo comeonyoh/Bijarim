@@ -33,7 +33,17 @@ public	class Response {
 
 public	class MetaResponse	: Response {
 	
+	var data:	Meta?
 	var list:	MetaList<Meta>?
+	
+	required	init(_ code: ResponseCode, rawData:	Any?	=	nil,	descriptor	classOfResponse:	Meta.Type) {
+		
+		super.init(code)
+		
+		if	let	rawData	=	rawData	{
+			self.data	=	classOfResponse.init(rawData)
+		}
+	}
 	
 	required	init (_ code: ResponseCode,	_ list: [Any]?	=	nil,	descriptor	classOfResponse:	MetaList<Meta>.Type) {
 

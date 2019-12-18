@@ -27,12 +27,28 @@ public	class	StringDescriptor:	Descriptor	{
 	
 }
 
-public	class	IntDescriptor:	Descriptor	{
+public	class	NumberDescriptor:	Descriptor	{
 	
 	override func setValue(meta: Meta, value: Any) {
 		
 		if	let	intValue	=	value	as?	Int	{
 			super.setValue(meta: meta, value: NSNumber(value: intValue))
+		}
+		else	if	let	floatValue	=	value	as?	Float	{
+			super.setValue(meta: meta, value: NSNumber(value: floatValue))
+		}
+		else	{
+			super.setValue(meta: meta, value: value)
+		}
+	}
+}
+
+public	class	ListDescriptor:	Descriptor	{
+
+	override func setValue(meta: Meta, value: Any) {
+		
+		if	let	listValue	=	value	as?	[Any]	{
+			super.setValue(meta: meta, value: listValue)
 		}
 		else	{
 			super.setValue(meta: meta, value: value)
