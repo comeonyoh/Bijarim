@@ -24,6 +24,7 @@
 		0150EA07239F2B6300D3394A /* TableViewRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0150EA06239F2B6300D3394A /* TableViewRequestLoader.swift */; };
 		01784B0B23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01784B0A23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift */; };
 		01784B0D23A0E12700EE2AF1 /* ComplexMetaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01784B0C23A0E12700EE2AF1 /* ComplexMetaViewController.swift */; };
+		0197037123AB06D9000E2132 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197037023AB06D9000E2132 /* UILabelExtension.swift */; };
 		01AD4004238F50150025B2C6 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AD4003238F50150025B2C6 /* RequestTests.swift */; };
 		7B47F10F238D5279001500C0 /* FirebaseRequestQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47F10E238D5279001500C0 /* FirebaseRequestQueue.swift */; };
 		7B8FF8A3238D4B8200B16001 /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8FF8A2238D4B8200B16001 /* LocalViewController.swift */; };
@@ -65,6 +66,7 @@
 		0150EA06239F2B6300D3394A /* TableViewRequestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewRequestLoader.swift; sourceTree = "<group>"; };
 		01784B0A23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewRequestLoader.swift; sourceTree = "<group>"; };
 		01784B0C23A0E12700EE2AF1 /* ComplexMetaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexMetaViewController.swift; sourceTree = "<group>"; };
+		0197037023AB06D9000E2132 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		01AD4003238F50150025B2C6 /* RequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; };
 		12367762BD9678F3EB1D1CC0 /* Pods-Bijarim-BijarimUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bijarim-BijarimUITests.debug.xcconfig"; path = "Target Support Files/Pods-Bijarim-BijarimUITests/Pods-Bijarim-BijarimUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3A033AB0D03D6917AFA40FE5 /* Pods-BijarimTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BijarimTests.debug.xcconfig"; path = "Target Support Files/Pods-BijarimTests/Pods-BijarimTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		014DEC3D238CA3DB00B99881 /* Bijarim */ = {
 			isa = PBXGroup;
 			children = (
+				0197036F23AB06CA000E2132 /* Extensions */,
 				014B46C52395DCF300A17E44 /* MetaObject */,
 				014DEC6E238CA44600B99881 /* Requests */,
 				7B9D19DA239004DF0021D0A0 /* Response */,
@@ -169,6 +172,14 @@
 				01784B0A23A0DFEF00EE2AF1 /* CollectionViewRequestLoader.swift */,
 			);
 			path = Requests;
+			sourceTree = "<group>";
+		};
+		0197036F23AB06CA000E2132 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0197037023AB06D9000E2132 /* UILabelExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0CA75340E51BC069D9D9CC89 /* Pods */ = {
@@ -385,6 +396,7 @@
 			files = (
 				0150EA07239F2B6300D3394A /* TableViewRequestLoader.swift in Sources */,
 				7B9D19DC239004F20021D0A0 /* Response.swift in Sources */,
+				0197037123AB06D9000E2132 /* UILabelExtension.swift in Sources */,
 				7B8FF8A3238D4B8200B16001 /* LocalViewController.swift in Sources */,
 				014B46C72395DD0400A17E44 /* MetaObject.swift in Sources */,
 				0150EA05239F1D2C00D3394A /* MultipleSectionViewController.swift in Sources */,

@@ -64,7 +64,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bp0-xt-C9v">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FFp-4v-gFh">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FFp-4v-gFh">
                                     <size key="itemSize" width="296" height="282"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -78,17 +78,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="296" height="282"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q4Y-ZV-rZU">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="500" verticalHuggingPriority="500" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Q4Y-ZV-rZU">
                                                     <rect key="frame" x="0.0" y="0.0" width="296" height="282"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhI-2V-huw">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhI-2V-huw" customClass="WidthExpandedLabel" customModule="Bijarim" customModuleProvider="target">
                                                     <rect key="frame" x="10" y="15" width="42" height="21"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QY3-CN-yDT">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QY3-CN-yDT" customClass="WidthExpandedLabel" customModule="Bijarim" customModuleProvider="target">
                                                     <rect key="frame" x="10" y="251" width="42" height="21"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -97,15 +99,15 @@
                                             <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="QY3-CN-yDT" firstAttribute="leading" secondItem="kKV-Su-v9L" secondAttribute="leading" constant="10" id="6aE-db-xBW"/>
+                                                <constraint firstItem="Q4Y-ZV-rZU" firstAttribute="leading" secondItem="kKV-Su-v9L" secondAttribute="leading" id="9Wj-w3-FB7"/>
                                                 <constraint firstItem="MhI-2V-huw" firstAttribute="top" secondItem="kKV-Su-v9L" secondAttribute="top" constant="15" id="D0g-Tp-Wlj"/>
-                                                <constraint firstAttribute="trailing" secondItem="Q4Y-ZV-rZU" secondAttribute="trailing" id="H8e-JZ-2kd"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QY3-CN-yDT" secondAttribute="trailing" constant="10" id="KoM-ul-kvn"/>
-                                                <constraint firstItem="Q4Y-ZV-rZU" firstAttribute="leading" secondItem="kKV-Su-v9L" secondAttribute="leading" id="Qmy-XI-mYe"/>
+                                                <constraint firstAttribute="trailing" secondItem="Q4Y-ZV-rZU" secondAttribute="trailing" id="MRg-gX-KAu"/>
+                                                <constraint firstAttribute="bottom" secondItem="Q4Y-ZV-rZU" secondAttribute="bottom" id="S76-oL-Ixy"/>
                                                 <constraint firstItem="MhI-2V-huw" firstAttribute="leading" secondItem="kKV-Su-v9L" secondAttribute="leading" constant="10" id="ePX-pd-dY1"/>
                                                 <constraint firstAttribute="bottom" secondItem="QY3-CN-yDT" secondAttribute="bottom" constant="10" id="hfF-Zw-m18"/>
-                                                <constraint firstAttribute="bottom" secondItem="Q4Y-ZV-rZU" secondAttribute="bottom" id="i2A-SA-azd"/>
+                                                <constraint firstItem="Q4Y-ZV-rZU" firstAttribute="top" secondItem="kKV-Su-v9L" secondAttribute="top" id="k5k-70-TFo"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MhI-2V-huw" secondAttribute="trailing" constant="10" id="pP9-rA-PFI"/>
-                                                <constraint firstItem="Q4Y-ZV-rZU" firstAttribute="top" secondItem="kKV-Su-v9L" secondAttribute="top" id="wkL-Bs-Rff"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseUI
 
 public	class	ComplexMetaViewController	:	CollectionViewController {}
 
@@ -45,14 +46,21 @@ public	class	ComplexSection	:	CollectionViewSection {
 
 			cell.nameLabel.text		=	player.name
 			cell.rankLabel.text		=	"\(player.rank.intValue)"
-//			cell.gradeLabel.text	=	player.info?.name
+
+			if	let	path	=	player.imagePath	{
+				cell.imageView.sd_setImage(with: Storage.storage().reference(withPath: "sample_images").child(path))
+			}
+			else	{
+				cell.imageView.image	=	nil
+			}
 		}
 
 		return	cell
 	}
 	
 	public	override	func layout(_ collectionView: UICollectionView,	layout	collectionViewLayout:	UICollectionViewLayout,	sizeForItemAt	row:	Int) -> CGSize {
-		return	CGSize(width: collectionView.bounds.size.width, height: 100)
+		let	width	=	collectionView.bounds.size.width	-	collectionView.contentInset.left	-	collectionView.contentInset.right
+		return	CGSize(width: width, height: 200)
 	}
 }
 
@@ -88,7 +96,7 @@ public	class	UserInfoDescriptor	:	CustomDescriptor	{
 	}
 }
 
-public	class	SoccerPlayer	:	Meta {
+public	class	SoccerPlayer	:	Meta,	SortableMeta {
 	
 	@objc	dynamic	var	rank: NSNumber!
 	@objc	dynamic	var name: String!
@@ -104,6 +112,10 @@ public	class	SoccerPlayer	:	Meta {
 			UserInfoDescriptor(from: "info", to: "info")
 		]
 	}
+	
+	var sortKey: Int	{
+		return rank.intValue
+	}
 }
 
 public	class	SoccerPlayerList	<T:	SoccerPlayer>	:	MetaList	<Meta> {
@@ -111,4 +123,9 @@ public	class	SoccerPlayerList	<T:	SoccerPlayer>	:	MetaList	<Meta> {
 	public	override	var	classOfItemMeta: Meta.Type	{
 		return	SoccerPlayer.self
 	}
+	
+	public	override	var	sortable:	Bool	{
+		return	true
+	}
+
 }

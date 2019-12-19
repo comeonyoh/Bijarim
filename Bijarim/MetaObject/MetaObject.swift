@@ -73,8 +73,6 @@ public	class	CustomDescriptor:	Descriptor	{
 	}
 }
 
-
-
 public	class	Meta:	NSObject	{
 
 	@objc	dynamic	var	identifier:	String!
@@ -118,6 +116,10 @@ public	class	Meta:	NSObject	{
 	}
 }
 
+protocol SortableMeta {
+	var sortKey:	Int	{	get	}
+}
+
 public	class	MetaList<T:	Meta>:	NSObject	{
 	
 	private	lazy	var list:	[T]?	=	{
@@ -125,7 +127,15 @@ public	class	MetaList<T:	Meta>:	NSObject	{
 		var	metaList	=	[T]()
 		return metaList
 	}()
-	
+
+	public	var classOfItemMeta:	Meta.Type	{
+		return Meta.self
+	}
+
+	public	var	sortable:	Bool	{
+		return	false
+	}
+
 	public	func appendItem(_ item: T) {
 		list?.append(item)
 	}
@@ -135,15 +145,27 @@ public	class	MetaList<T:	Meta>:	NSObject	{
 		super.init()
 		
 		for	data	in	rawData	{
-
+		
 			if	let	meta	=	classOfItemMeta.init(data)	as?	T	{
 				self.appendItem(meta)
 			}
 		}
+		
+		if	sortable	==	true	{
+			internalSort()
+		}
 	}
 	
-	public	var classOfItemMeta:	Meta.Type	{
-		return Meta.self
+	private	func	internalSort() {
+
+		list	=	list?.sorted(by: { (meta1, meta2) -> Bool in
+			
+			if	let	sort1	=	meta1	as?	SortableMeta,	let	sort2	=	meta2	as?	SortableMeta	{
+				return sort1.sortKey	<	sort2.sortKey
+			}
+
+			return false
+		})
 	}
 }
 
@@ -172,4 +194,5 @@ extension	MetaList:	Collection	{
 		guard	let	list	=	list	else	{	return 0	}
 		return	list.index(after: i)
 	}
+	
 }
