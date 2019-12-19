@@ -22,7 +22,24 @@ public	struct FirebasePathItem {
 
 public	class FirebaseRequestQueue: SerializeQueue {
 
-	let	store	=	Firestore.firestore()
+	private	let	store	=	Firestore.firestore()
+	
+	public	var offlineEnable:	Bool	{
+		return	false
+	}
+	
+	override func prepareInitialize(_ stream: RequestQueueStream?) {
+
+		super.prepareInitialize(stream)
+		
+		if	offlineEnable	==	true	{
+
+			let	settings	=	FirestoreSettings()
+			settings.isPersistenceEnabled	=	true
+			
+			store.settings	=	settings
+		}
+	}
 	
 	public	override func addOperation(_ op: Operation) {
 

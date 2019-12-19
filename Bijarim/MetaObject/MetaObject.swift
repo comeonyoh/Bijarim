@@ -23,11 +23,11 @@ public	class	Descriptor {
 	}
 }
 
-public	class	StringDescriptor:	Descriptor	{
+public	class	StringDescriptor	:	Descriptor	{
 	
 }
 
-public	class	NumberDescriptor:	Descriptor	{
+public	class	NumberDescriptor	:	Descriptor	{
 	
 	override func setValue(meta: Meta, value: Any) {
 		
@@ -43,7 +43,7 @@ public	class	NumberDescriptor:	Descriptor	{
 	}
 }
 
-public	class	ListDescriptor:	Descriptor	{
+public	class	ListDescriptor		:	Descriptor	{
 
 	override func setValue(meta: Meta, value: Any) {
 		
@@ -56,7 +56,7 @@ public	class	ListDescriptor:	Descriptor	{
 	}
 }
 
-public	class	CustomDescriptor:	Descriptor	{
+public	class	CustomDescriptor	:	Descriptor	{
 	
 	public	var	metaClass:	Meta.Type	{
 		return	Meta.self
@@ -73,7 +73,7 @@ public	class	CustomDescriptor:	Descriptor	{
 	}
 }
 
-public	class	Meta:	NSObject	{
+public	class	Meta				:	NSObject	{
 
 	@objc	dynamic	var	identifier:	String!
 
@@ -81,7 +81,7 @@ public	class	Meta:	NSObject	{
 		return	[String	:	Any]()
 	}()
 
-	required	public override init() {
+	required	public	override init() {
 		super.init()
 	}
 	

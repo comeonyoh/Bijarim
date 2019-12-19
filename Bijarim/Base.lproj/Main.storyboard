@@ -141,7 +141,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cl8-hR-70E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <customObject id="hET-IV-aAY" userLabel="CollectionViewRequestLoader" customClass="CollectionViewRequestLoader" customModule="Bijarim" customModuleProvider="target">
+                <customObject id="hET-IV-aAY" userLabel="CollectionViewRequestLoader" customClass="ComplexDataLoader" customModule="Bijarim" customModuleProvider="target">
                     <connections>
                         <outletCollection property="sections" destination="NRW-tP-HlR" collectionClass="NSMutableArray" id="3Wk-j6-C8k"/>
                     </connections>

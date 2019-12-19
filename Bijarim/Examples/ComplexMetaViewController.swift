@@ -8,10 +8,11 @@
 
 import UIKit
 import FirebaseUI
+import FirebaseAnalytics
 
 public	class	ComplexMetaViewController	:	CollectionViewController {}
 
-public	class	ComplexSection	:	CollectionViewSection {
+public	class	ComplexSection				:	CollectionViewSection {
 	
 	public	override	var name: String?	{
 		set	{}
@@ -64,9 +65,14 @@ public	class	ComplexSection	:	CollectionViewSection {
 	}
 }
 
+public	class	ComplexDataLoader			:	CollectionViewRequestLoader	{
+	
+	public override var offlineEnable: Bool	{
+		return	true
+	}
+}
 
-
-public	class	ComplexCell:	UICollectionViewCell	{
+public	class	ComplexCell					:	UICollectionViewCell	{
 	
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var nameLabel: UILabel!
@@ -76,7 +82,7 @@ public	class	ComplexCell:	UICollectionViewCell	{
 
 
 
-public	class	UserInfo	:	Meta {
+public	class	UserInfo			:	Meta {
 	
 	@objc	dynamic	var name: String?
 	dynamic	var level:	NSNumber?
@@ -96,7 +102,7 @@ public	class	UserInfoDescriptor	:	CustomDescriptor	{
 	}
 }
 
-public	class	SoccerPlayer	:	Meta,	SortableMeta {
+public	class	SoccerPlayer		:	Meta,	SortableMeta {
 	
 	@objc	dynamic	var	rank: NSNumber!
 	@objc	dynamic	var name: String!
