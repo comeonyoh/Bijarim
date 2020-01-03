@@ -14,17 +14,21 @@ public	class CollectionViewSection: RequestSection {
 		return	"Cell"
 	}
 	
-	public	func numberOfRows(_ collectionView: UICollectionView) -> Int {
+	public	func	numberOfRows(_ collectionView: UICollectionView) -> Int {
 		return self.numberOfItems
 	}
 	
-	public	func invalidateCell(_ collectionView: UICollectionView, at indexPath:	IndexPath)	->	UICollectionViewCell{
+	public	func	invalidateCell(_ collectionView: UICollectionView, at indexPath:	IndexPath)	->	UICollectionViewCell{
 		
 		return	collectionView.dequeueReusableCell(withReuseIdentifier: type(of: self).cellIdentifier, for: indexPath)
 	}
 
-	public	func layout(_ collectionView: UICollectionView,	layout	collectionViewLayout:	UICollectionViewLayout,	sizeForItemAt	row:	Int) -> CGSize {
+	public	func	layout(_ collectionView: UICollectionView,	layout	collectionViewLayout:	UICollectionViewLayout,	sizeForItemAt	row:	Int) -> CGSize {
 		return	.zero
+	}
+	
+	public	func	didSelect(_ collectionView: UICollectionView, at index:	Int) {
+		
 	}
 }
 
@@ -67,6 +71,9 @@ extension	CollectionViewRequestLoader:	UICollectionViewDataSource	{
 
 extension	CollectionViewRequestLoader:	UICollectionViewDelegate	{
 	
+	public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		self[indexPath.section]?.didSelect(collectionView, at: indexPath.row)
+	}
 }
 
 extension	CollectionViewRequestLoader:	UICollectionViewDelegateFlowLayout	{
