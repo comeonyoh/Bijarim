@@ -46,11 +46,11 @@ public	class	Human	:	Meta	{
 }
 ```
 
-###Descritor
+### Descritor
 Descriptor will be used to parse raw data. The from value will be used to find key in raw data and will map it to to value.
 Because raw data-data type can be different from result data`s type, the descriptor describes return type.
 
-###Meta
+### Meta
 Data model will be used. It has multiple descriptos to parse each properties.
 
 In application and test codes, There is a list type which can help you list up easlity in UITableView or UICollectionView.
